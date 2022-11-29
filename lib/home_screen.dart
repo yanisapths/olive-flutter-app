@@ -82,6 +82,16 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                                 return DaycareListView(
                                   animation: animation,
                                   animationController: animationController,
+                                  listData: homeList[index],
+                                  callBack: () {
+                                    Navigator.push<dynamic>(
+                                      context,
+                                      MaterialPageRoute<dynamic>(
+                                        builder: (BuildContext context) =>
+                                            homeList[index].navigateScreen!,
+                                      ),
+                                    );
+                                  },
                                 );
                               },
                             ),
