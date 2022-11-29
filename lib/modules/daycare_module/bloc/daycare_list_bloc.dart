@@ -1,7 +1,11 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 
 import '../../../entities/daycare_entities.dart';
+import '../../../helpers/network_constant.dart';
+import '../../../helpers/network_helper.dart';
 
 abstract class DaycareBlocEvent {}
 
@@ -32,6 +36,13 @@ class DaycareBloc extends Bloc<DaycareBlocEvent, DaycareBlocState> {
   setAnimation(Animation<double>? animation) {
     state.animation = animation;
     emit(state);
+  }
+
+  sendFetchDaycareRequest() async {
+    final networkHelper = NetworkHelper();
+    final data = await networkHelper.fetchDaycares(DAYCARE_URL);
+    log("data: " + data[0].name);
+    return data;
   }
 }
 

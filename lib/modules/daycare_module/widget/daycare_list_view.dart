@@ -1,29 +1,23 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 
-import '../../entities/daycare_entities.dart';
-import '../../helpers/network_constant.dart';
-import '../../helpers/network_helper.dart';
-import '../../model/homelist.dart';
+import '../../../entities/daycare_entities.dart';
 
 class DaycareListView extends StatelessWidget {
   const DaycareListView({
     Key? key,
     this.animationController,
     this.animation,
-    this.listData,
+    this.daycareData,
     this.callBack,
   }) : super(key: key);
 
-  final HomeList? listData;
+  final Daycare? daycareData;
   final VoidCallback? callBack;
   final AnimationController? animationController;
   final Animation<double>? animation;
 
   @override
   Widget build(BuildContext context) {
-    sendFetchDaycareRequest();
     return AnimatedBuilder(
       animation: animationController!,
       builder: (BuildContext context, Widget? child) {
@@ -41,7 +35,7 @@ class DaycareListView extends StatelessWidget {
                   children: <Widget>[
                     Positioned.fill(
                       child: Image.asset(
-                        listData!.imagePath,
+                        daycareData!.name,
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -63,11 +57,4 @@ class DaycareListView extends StatelessWidget {
       },
     );
   }
-}
-
-Future<Daycare> sendFetchDaycareRequest() async {
-  final networkHelper = NetworkHelper();
-  final data = await networkHelper.fetchDaycares(DAYCARE_URL);
-  log("data: " + data[0].name);
-  return data[0];
 }
