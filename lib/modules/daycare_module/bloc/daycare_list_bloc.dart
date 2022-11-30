@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 
@@ -40,8 +38,7 @@ class DaycareBloc extends Bloc<DaycareBlocEvent, DaycareBlocState> {
 
   sendFetchDaycareRequest() async {
     final networkHelper = NetworkHelper();
-    final data = await networkHelper.fetchDaycares(DAYCARE_URL_DEV);
-    log("data: " + data[0].name);
+    final data = await networkHelper.fetchDaycares(DAYCARE_URL);
     return data;
   }
 }

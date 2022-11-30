@@ -1,5 +1,6 @@
-import 'package:best_flutter_ui_templates/main.dart';
 import 'package:flutter/material.dart';
+
+import '../../main.dart';
 
 class DaycareAppTheme {
   static TextTheme _buildTextTheme(TextTheme base) {

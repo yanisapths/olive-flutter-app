@@ -1,4 +1,3 @@
-import 'package:best_flutter_ui_templates/modules/daycare_module/daycare_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
@@ -7,6 +6,7 @@ import '../../entities/daycare_entities.dart';
 import '../service_module/hotel_booking/calendar_popup_view.dart';
 import '../service_module/hotel_booking/filters_screen.dart';
 import 'bloc/daycare_list_bloc.dart';
+import 'daycare_theme.dart';
 import 'widget/daycare_list_view.dart';
 
 class DaycareHomeScreen extends StatefulWidget {
