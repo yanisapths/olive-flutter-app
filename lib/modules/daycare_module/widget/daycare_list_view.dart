@@ -34,8 +34,8 @@ class DaycareListView extends StatelessWidget {
                   alignment: AlignmentDirectional.center,
                   children: <Widget>[
                     Positioned.fill(
-                      child: Image.asset(
-                        daycareData!.name,
+                      child: Image.network(
+                        daycareData!.imageUrl,
                         fit: BoxFit.cover,
                       ),
                     ),

@@ -11,19 +11,22 @@ String daycareToJson(List<Daycare> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class Daycare {
-  Daycare({
-    required this.name,
-    required this.address,
-    required this.owner,
-    required this.phoneNumber,
-    required this.email,
-  });
+  Daycare(
+      {required this.name,
+      required this.address,
+      required this.owner,
+      required this.phoneNumber,
+      required this.email,
+      required this.imageUrl,
+      String? approvalStatus});
 
   String name;
   String address;
   String owner;
   String phoneNumber;
   String email;
+  String imageUrl;
+  late String approvalStatus;
 
   factory Daycare.fromJson(Map<String, dynamic> json) => Daycare(
         name: json["name"],
@@ -31,6 +34,8 @@ class Daycare {
         owner: json["owner"],
         phoneNumber: json["phoneNumber"],
         email: json["email"],
+        imageUrl: json["imageUrl"],
+        approvalStatus: json["approvalStatus"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -39,5 +44,7 @@ class Daycare {
         "owner": owner,
         "phoneNumber": phoneNumber,
         "email": email,
+        "imageUrl": imageUrl,
+        "approvalStatus": approvalStatus,
       };
 }

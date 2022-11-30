@@ -18,7 +18,7 @@ class _DaycareHomeScreenState extends State<DaycareHomeScreen>
     with TickerProviderStateMixin {
   AnimationController? animationController;
   final ScrollController _scrollController = ScrollController();
-  late List<Daycare> daycareList;
+  List<Daycare> daycareList = [];
   DateTime startDate = DateTime.now();
   DateTime endDate = DateTime.now().add(const Duration(days: 5));
 
@@ -38,6 +38,9 @@ class _DaycareHomeScreenState extends State<DaycareHomeScreen>
   getDaycareData() async {
     final DaycareBloc _daycareBloc = DaycareBloc();
     daycareList = await _daycareBloc.sendFetchDaycareRequest();
+    setState(() {
+      daycareList = daycareList;
+    });
   }
 
   @override

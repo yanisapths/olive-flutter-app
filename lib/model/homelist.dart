@@ -1,7 +1,6 @@
 import 'package:flutter/widgets.dart';
 
 import '../modules/daycare_module/daycare_home_screen.dart';
-import '../modules/service_module/introduction_animation/introduction_animation_screen.dart';
 
 class HomeList {
   HomeList({
@@ -14,11 +13,7 @@ class HomeList {
 
   static List<HomeList> homeList = [
     HomeList(
-      imagePath: 'assets/introduction_animation/introduction_animation.png',
-      navigateScreen: IntroductionAnimationScreen(),
-    ),
-    HomeList(
-      imagePath: 'assets/hotel/hotel_booking.png',
+      imagePath: 'assets/landing/daycare_service_landing.png',
       navigateScreen: DaycareHomeScreen(),
     ),
   ];
