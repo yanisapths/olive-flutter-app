@@ -1,6 +1,6 @@
 import 'package:http/http.dart' as http;
 
-import '../entities/daycare_entities.dart';
+import '../../entities/daycare_entities.dart';
 
 class NetworkHelper {
   Future<List<Daycare>> fetchDaycares(url) async {
