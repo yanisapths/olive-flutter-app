@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "153746750887",
+    "firebase_url": "https://happyelders-customer-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "happyelders-customer",
+    "storage_bucket": "happyelders-customer.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:153746750887:android:03a4e7c592dc60696cca82",
+        "android_client_info": {
+          "package_name": "com.example.olive"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "153746750887-bnfrr1l6mpjq2fgj4hv7322f5plftsjf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCBeYoTh-h9tn_JH__lrJ6HYv0ecvX0JFs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "153746750887-bnfrr1l6mpjq2fgj4hv7322f5plftsjf.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "153746750887-matiskfqp2h0sg5h41p0ei445bqq9392.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.olive"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

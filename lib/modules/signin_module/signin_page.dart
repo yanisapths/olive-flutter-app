@@ -16,7 +16,7 @@ class _SigninPageState extends State<SignInPage>
     with AutomaticKeepAliveClientMixin, TickerProviderStateMixin {
   UserProfile? userProfile;
   String? userEmail;
-  StoredAccessToken? _accessToken;
+  StoredAccessToken? accessToken;
   AnimationController? animationController;
   final ScrollController _scrollController = ScrollController();
   List<Daycare> daycareList = [];
@@ -54,7 +54,7 @@ class _SigninPageState extends State<SignInPage>
 
     setState(() {
       userProfile = userProfile;
-      _accessToken = accessToken;
+      accessToken = accessToken;
     });
   }
 
@@ -137,14 +137,14 @@ class _SigninPageState extends State<SignInPage>
     try {
       final result =
           await LineSDK.instance.login(scopes: _selectedScopes.toList());
-      final accessToken = await LineSDK.instance.currentAccessToken;
+      final _accessToken = await LineSDK.instance.currentAccessToken;
 
       final _userEmail = result.accessToken.email;
 
       setState(() {
         userProfile = result.userProfile;
         userEmail = _userEmail;
-        _accessToken = accessToken;
+        accessToken = _accessToken;
       });
     } on PlatformException catch (e) {
       _showDialog(context, e.toString());
@@ -157,7 +157,7 @@ class _SigninPageState extends State<SignInPage>
       setState(() {
         userProfile = null;
         userEmail = null;
-        _accessToken = null;
+        accessToken = null;
       });
     } on PlatformException catch (e) {
       print(e.message);
