@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>153746750887-matiskfqp2h0sg5h41p0ei445bqq9392.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.153746750887-matiskfqp2h0sg5h41p0ei445bqq9392</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDJqDvDrYYxOCU11j7W2kSTtDFaZw-TGE0</string>
+	<key>GCM_SENDER_ID</key>
+	<string>153746750887</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.olive</string>
+	<key>PROJECT_ID</key>
+	<string>happyelders-customer</string>
+	<key>STORAGE_BUCKET</key>
+	<string>happyelders-customer.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:153746750887:ios:de6eec1dcc06a2bb6cca82</string>
+	<key>DATABASE_URL</key>
+	<string>https://happyelders-customer-default-rtdb.asia-southeast1.firebasedatabase.app</string>
+</dict>
+</plist>
