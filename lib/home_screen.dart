@@ -1,7 +1,7 @@
-import 'package:best_flutter_ui_templates/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'app_theme.dart';
 import 'model/homelist.dart';
-import 'modules/daycare_module/daycare_screen.dart';
+import 'modules/home_module/widget/home_list_view.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -79,7 +79,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                                   ),
                                 );
                                 animationController?.forward();
-                                return DaycareListView(
+                                return HomeListView(
                                   animation: animation,
                                   animationController: animationController,
                                   listData: homeList[index],

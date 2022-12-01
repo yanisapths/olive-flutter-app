@@ -1,19 +1,33 @@
 import 'dart:io';
-import 'package:best_flutter_ui_templates/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'navigation_home_screen.dart';
+import 'package:flutter_line_sdk/flutter_line_sdk.dart';
+import 'app_theme.dart';
+import 'firebase_options.dart';
+import 'modules/signin_module/signin_page.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  FirebaseApp app = await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  print('Initialized default app $app');
+
   await SystemChrome.setPreferredOrientations(<DeviceOrientation>[
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown
-  ]).then((_) => runApp(MyApp()));
+  ]);
+  LineSDK.instance.setup('1656791451').then((_) {
+    print('LineSDK Prepared');
+  }).then((_) => runApp(MyApp()));
 }
 
 class MyApp extends StatelessWidget {
+  @override
+  void initState() {}
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -33,7 +47,7 @@ class MyApp extends StatelessWidget {
         textTheme: AppTheme.textTheme,
         platform: TargetPlatform.iOS,
       ),
-      home: NavigationHomeScreen(),
+      home: SignInPage(),
     );
   }
 }
