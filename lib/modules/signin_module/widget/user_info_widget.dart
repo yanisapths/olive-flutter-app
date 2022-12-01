@@ -33,9 +33,6 @@ class UserInfoWidget extends StatelessWidget {
             userProfile.displayName,
             style: Theme.of(context).textTheme.headline5,
           ),
-          if (userEmail != null) Text(userEmail!),
-          if (userProfile.statusMessage != null)
-            Text(userProfile.statusMessage!),
           Container(
               child: ElevatedButton(
                   child: Text('Sign Out'),

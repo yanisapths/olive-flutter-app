@@ -3,8 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_line_sdk/flutter_line_sdk.dart';
 import 'package:olive/modules/daycare_module/daycare_theme.dart';
 
+import '../../entities/daycare_entities.dart';
+import '../daycare_module/daycare_home_screen.dart';
 import 'theme.dart';
-import 'widget/user_info_widget.dart';
 
 class SignInPage extends StatefulWidget {
   @override
@@ -12,10 +13,15 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SigninPageState extends State<SignInPage>
-    with AutomaticKeepAliveClientMixin {
+    with AutomaticKeepAliveClientMixin, TickerProviderStateMixin {
   UserProfile? userProfile;
   String? userEmail;
   StoredAccessToken? _accessToken;
+  AnimationController? animationController;
+  final ScrollController _scrollController = ScrollController();
+  List<Daycare> daycareList = [];
+  DateTime startDate = DateTime.now();
+  DateTime endDate = DateTime.now().add(const Duration(days: 5));
   // bool _isOnlyWebLogin = false;
 
   final Set<String> _selectedScopes = Set.from(['profile']);
@@ -25,6 +31,8 @@ class _SigninPageState extends State<SignInPage>
 
   @override
   void initState() {
+    animationController = AnimationController(
+        duration: const Duration(milliseconds: 1000), vsync: this);
     super.initState();
     initPlatformState();
   }
@@ -73,12 +81,7 @@ class _SigninPageState extends State<SignInPage>
         ),
       );
     } else {
-      return UserInfoWidget(
-        userProfile: userProfile!,
-        userEmail: userEmail,
-        accessToken: _accessToken!,
-        onSignOutPressed: _signOut,
-      );
+      return DaycareHomeScreen();
     }
   }
 

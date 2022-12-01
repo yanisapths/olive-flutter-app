@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_line_sdk/flutter_line_sdk.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 
@@ -21,10 +23,14 @@ class _DaycareHomeScreenState extends State<DaycareHomeScreen>
   List<Daycare> daycareList = [];
   DateTime startDate = DateTime.now();
   DateTime endDate = DateTime.now().add(const Duration(days: 5));
+  UserProfile? userProfile;
+  String? userEmail;
+  StoredAccessToken? accessToken;
 
   @override
   void initState() {
     getDaycareData();
+    initPlatformState();
     animationController = AnimationController(
         duration: const Duration(milliseconds: 1000), vsync: this);
     super.initState();
@@ -33,6 +39,27 @@ class _DaycareHomeScreenState extends State<DaycareHomeScreen>
   Future<bool> getData() async {
     await Future<dynamic>.delayed(const Duration(milliseconds: 200));
     return true;
+  }
+
+  Future<void> initPlatformState() async {
+    UserProfile? userProfile;
+    StoredAccessToken? accessToken;
+
+    try {
+      accessToken = await LineSDK.instance.currentAccessToken;
+      if (accessToken != null) {
+        userProfile = await LineSDK.instance.getProfile();
+      }
+    } on PlatformException catch (e) {
+      print(e.message);
+    }
+
+    if (!mounted) return;
+
+    setState(() {
+      userProfile = userProfile;
+      accessToken = accessToken;
+    });
   }
 
   getDaycareData() async {

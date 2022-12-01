@@ -12,12 +12,18 @@ class DaycareListView extends StatelessWidget {
     this.animation,
     this.daycareData,
     this.callBack,
+    // required this.userProfile,
+    // this.userEmail,
+    // required this.accessToken,
   }) : super(key: key);
 
   final Daycare? daycareData;
   final VoidCallback? callBack;
   final AnimationController? animationController;
   final Animation<double>? animation;
+  // final UserProfile userProfile;
+  // final String? userEmail;
+  // final StoredAccessToken accessToken;
 
   @override
   Widget build(BuildContext context) {
