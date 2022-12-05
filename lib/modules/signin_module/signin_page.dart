@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_line_sdk/flutter_line_sdk.dart';
-import 'package:olive/modules/daycare_module/daycare_theme.dart';
+import 'package:olive/app_theme.dart';
+import 'package:olive/modules/home_module/home_screen.dart';
 
+import '../../common/app_constant.dart';
 import '../../entities/daycare_entities.dart';
-import '../daycare_module/daycare_home_screen.dart';
-import 'theme.dart';
+import '../../model/homelist.dart';
+import '../daycare_module/daycare_theme.dart';
 
 class SignInPage extends StatefulWidget {
   @override
@@ -22,7 +24,8 @@ class _SigninPageState extends State<SignInPage>
   List<Daycare> daycareList = [];
   DateTime startDate = DateTime.now();
   DateTime endDate = DateTime.now().add(const Duration(days: 5));
-  // bool _isOnlyWebLogin = false;
+  List<HomeList> homeList = HomeList.homeList;
+  static const LINE_ICON_SIZE = 350.00;
 
   final Set<String> _selectedScopes = Set.from(['profile']);
 
@@ -32,7 +35,7 @@ class _SigninPageState extends State<SignInPage>
   @override
   void initState() {
     animationController = AnimationController(
-        duration: const Duration(milliseconds: 1000), vsync: this);
+        duration: ANIMATIONCONTROLLER_DURATION, vsync: this);
     super.initState();
     initPlatformState();
   }
@@ -62,76 +65,52 @@ class _SigninPageState extends State<SignInPage>
   Widget build(BuildContext context) {
     super.build(context);
     if (userProfile == null) {
-      return Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: <Widget>[
-            _configCard(),
-            Expanded(
-              child: Center(
-                  child: ElevatedButton(
-                      child: Text('Sign In'),
-                      onPressed: _signIn,
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                              DaycareAppTheme.buildLightTheme().backgroundColor,
-                          foregroundColor: textColor))),
-            ),
-          ],
-        ),
-      );
+      return SafeArea(
+          child: Theme(
+              data: DaycareAppTheme.buildLightTheme(),
+              child: Container(
+                  child: Scaffold(
+                      backgroundColor: AppTheme.backgroundPrimary_light,
+                      body: Stack(children: <Widget>[
+                        Padding(
+                          padding: EdgeInsets.only(
+                              top: PADDING_20, bottom: PADDING_12),
+                          child: Center(
+                            child: Image.asset('assets/common/bg-login.png'),
+                          ),
+                        ),
+                        Column(
+                          children: <Widget>[
+                            Padding(
+                                padding: EdgeInsets.only(top: PADDING_230),
+                                child: Text('เข้าสู่ระบบผ่านไลน์แอพพลิเคชัน',
+                                    style:
+                                        TextStyle(fontSize: AppTheme.FONT_20))),
+                            Center(
+                                child: ClipRRect(
+                                    child: Material(
+                                        color: Colors.transparent,
+                                        child: IconButton(
+                                          onPressed: () {
+                                            _signIn();
+                                          },
+                                          iconSize: LINE_ICON_SIZE,
+                                          icon: Image.asset(
+                                              'assets/icon/line_icon.png'),
+                                        ))))
+                          ],
+                        )
+                      ])))));
     } else {
-      return DaycareHomeScreen();
+      return HomeLandingPage(
+          userProfile: userProfile!,
+          userEmail: userEmail,
+          accessToken: accessToken!,
+          onSignOutPressed: _signOut,
+          animationController: animationController,
+          homeList: homeList);
     }
   }
-
-  Widget _configCard() {
-    return Card(
-      child: Padding(
-        padding: EdgeInsets.all(15.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            _scopeListUI(),
-            SizedBox(
-              height: 10.0,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _scopeListUI() => Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text('Scopes: '),
-          Wrap(
-            children:
-                _scopes.map<Widget>((scope) => _buildScopeChip(scope)).toList(),
-          ),
-        ],
-      );
-
-  Widget _buildScopeChip(String scope) => Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 4.0),
-        child: ChipTheme(
-          data: ChipTheme.of(context).copyWith(brightness: Brightness.dark),
-          child: FilterChip(
-            label: Text(scope, style: TextStyle(color: textColor)),
-            selectedColor: DaycareAppTheme.buildLightTheme().primaryColor,
-            backgroundColor: secondaryBackgroundColor,
-            selected: _selectedScopes.contains(scope),
-            onSelected: (_) {
-              setState(() {
-                _selectedScopes.contains(scope)
-                    ? _selectedScopes.remove(scope)
-                    : _selectedScopes.add(scope);
-              });
-            },
-          ),
-        ),
-      );
 
   void _signIn() async {
     try {
@@ -177,13 +156,10 @@ class _SigninPageState extends State<SignInPage>
                   Navigator.of(context).pop();
                 },
                 style: TextButton.styleFrom(
-                    foregroundColor: DaycareAppTheme.buildLightTheme()
-                        .secondaryHeaderColor)),
+                    foregroundColor: const Color(0xFFFFFFFF))),
           ],
         );
       },
     );
   }
 }
-
-const List<String> _scopes = <String>['profile', 'openid', 'email'];

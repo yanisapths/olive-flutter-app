@@ -2,8 +2,8 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 
 import '../../../entities/daycare_entities.dart';
-import '../../../helpers/network_constant.dart';
-import '../../../helpers/network_helper.dart';
+import '../../../common/helpers/network_constant.dart';
+import '../../../common/helpers/network_helper.dart';
 
 abstract class DaycareBlocEvent {}
 
