@@ -1,5 +1,4 @@
 // URL PATHS
-
 const DEV = "dev";
 const PROD = "prod";
 const DAYCARE = "daycare";
