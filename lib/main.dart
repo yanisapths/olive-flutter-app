@@ -30,7 +30,7 @@ void main() async {
 void initialization() async {
   // load resources
   await Future.delayed(Duration(seconds: 3));
-  // whenever your initialization is completed, remove the splash screen:
+  // whenever initialization is completed, remove the splash screen:
   FlutterNativeSplash.remove();
 }
 
