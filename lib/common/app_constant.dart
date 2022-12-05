@@ -7,3 +7,4 @@ const PADDING_230 = 230.00;
 // Duration
 const SPLASHSCREEN_DURATION = Duration(seconds: 3);
 const ANIMATIONCONTROLLER_DURATION = Duration(milliseconds: 1000);
+const ANIMATIONCONTROLLER_DURATION_2000 = Duration(milliseconds: 2000);
