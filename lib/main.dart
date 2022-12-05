@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_line_sdk/flutter_line_sdk.dart';
 import 'app_theme.dart';
+import 'common/app_constant.dart';
 import 'firebase_options.dart';
 import 'modules/signin_module/signin_page.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
@@ -29,7 +30,7 @@ void main() async {
 
 void initialization() async {
   // load resources
-  await Future.delayed(Duration(seconds: 3));
+  await Future.delayed(SPLASHSCREEN_DURATION);
   // whenever initialization is completed, remove the splash screen:
   FlutterNativeSplash.remove();
 }

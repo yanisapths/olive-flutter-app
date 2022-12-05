@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_line_sdk/flutter_line_sdk.dart';
 import 'package:olive/app_theme.dart';
 
+import '../../common/app_constant.dart';
 import '../../entities/daycare_entities.dart';
 import '../daycare_module/daycare_theme.dart';
 import '../home_module/home_screen.dart';
@@ -22,6 +23,7 @@ class _SigninPageState extends State<SignInPage>
   List<Daycare> daycareList = [];
   DateTime startDate = DateTime.now();
   DateTime endDate = DateTime.now().add(const Duration(days: 5));
+  static const LINE_ICON_SIZE = 350.00;
 
   final Set<String> _selectedScopes = Set.from(['profile']);
 
@@ -31,7 +33,7 @@ class _SigninPageState extends State<SignInPage>
   @override
   void initState() {
     animationController = AnimationController(
-        duration: const Duration(milliseconds: 1000), vsync: this);
+        duration: ANIMATIONCONTROLLER_DURATION, vsync: this);
     super.initState();
     initPlatformState();
   }
@@ -69,7 +71,8 @@ class _SigninPageState extends State<SignInPage>
                       backgroundColor: AppTheme.backgroundPrimary_light,
                       body: Stack(children: <Widget>[
                         Padding(
-                          padding: EdgeInsets.only(top: 20, bottom: 12),
+                          padding: EdgeInsets.only(
+                              top: PADDING_20, bottom: PADDING_12),
                           child: Center(
                             child: Image.asset('assets/common/bg-login.png'),
                           ),
@@ -77,23 +80,22 @@ class _SigninPageState extends State<SignInPage>
                         Column(
                           children: <Widget>[
                             Padding(
-                                padding: EdgeInsets.only(top: 260),
-                                child: Text('เข้าสู่ระบบ',
-                                    style: TextStyle(fontSize: 24))),
-                            Padding(
-                                padding: EdgeInsets.only(top: 16),
-                                child: Center(
-                                    child: ClipRRect(
-                                        child: Material(
-                                            color: Colors.transparent,
-                                            child: IconButton(
-                                              onPressed: () {
-                                                _signIn();
-                                              },
-                                              iconSize: 85,
-                                              icon: Image.asset(
-                                                  'assets/icon/line-logo.png'),
-                                            )))))
+                                padding: EdgeInsets.only(top: PADDING_230),
+                                child: Text('เข้าสู่ระบบผ่านไลน์แอพพลิเคชัน',
+                                    style:
+                                        TextStyle(fontSize: AppTheme.FONT_20))),
+                            Center(
+                                child: ClipRRect(
+                                    child: Material(
+                                        color: Colors.transparent,
+                                        child: IconButton(
+                                          onPressed: () {
+                                            _signIn();
+                                          },
+                                          iconSize: LINE_ICON_SIZE,
+                                          icon: Image.asset(
+                                              'assets/icon/line_icon.png'),
+                                        ))))
                           ],
                         )
                       ])))));
