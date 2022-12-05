@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 class AppTheme {
   AppTheme._();
 
+  static const Color backgroundPrimary_light =
+      Color.fromARGB(224, 172, 222, 213);
+
   static const Color notWhite = Color(0xFFEDF0F2);
   static const Color nearlyWhite = Color(0xFFFEFEFE);
   static const Color white = Color(0xFFFFFFFF);
@@ -29,7 +32,8 @@ class AppTheme {
     caption: caption,
   );
 
-  static const TextStyle display1 = TextStyle( // h4 -> display1
+  static const TextStyle display1 = TextStyle(
+    // h4 -> display1
     fontFamily: fontName,
     fontWeight: FontWeight.bold,
     fontSize: 36,
@@ -38,7 +42,8 @@ class AppTheme {
     color: darkerText,
   );
 
-  static const TextStyle headline = TextStyle( // h5 -> headline
+  static const TextStyle headline = TextStyle(
+    // h5 -> headline
     fontFamily: fontName,
     fontWeight: FontWeight.bold,
     fontSize: 24,
@@ -46,7 +51,8 @@ class AppTheme {
     color: darkerText,
   );
 
-  static const TextStyle title = TextStyle( // h6 -> title
+  static const TextStyle title = TextStyle(
+    // h6 -> title
     fontFamily: fontName,
     fontWeight: FontWeight.bold,
     fontSize: 16,
@@ -54,7 +60,8 @@ class AppTheme {
     color: darkerText,
   );
 
-  static const TextStyle subtitle = TextStyle( // subtitle2 -> subtitle
+  static const TextStyle subtitle = TextStyle(
+    // subtitle2 -> subtitle
     fontFamily: fontName,
     fontWeight: FontWeight.w400,
     fontSize: 14,
@@ -62,7 +69,8 @@ class AppTheme {
     color: darkText,
   );
 
-  static const TextStyle body2 = TextStyle( // body1 -> body2
+  static const TextStyle body2 = TextStyle(
+    // body1 -> body2
     fontFamily: fontName,
     fontWeight: FontWeight.w400,
     fontSize: 14,
@@ -70,7 +78,8 @@ class AppTheme {
     color: darkText,
   );
 
-  static const TextStyle body1 = TextStyle( // body2 -> body1
+  static const TextStyle body1 = TextStyle(
+    // body2 -> body1
     fontFamily: fontName,
     fontWeight: FontWeight.w400,
     fontSize: 16,
@@ -78,12 +87,12 @@ class AppTheme {
     color: darkText,
   );
 
-  static const TextStyle caption = TextStyle( // Caption -> caption
+  static const TextStyle caption = TextStyle(
+    // Caption -> caption
     fontFamily: fontName,
     fontWeight: FontWeight.w400,
     fontSize: 12,
     letterSpacing: 0.2,
     color: lightText, // was lightText
   );
-
 }

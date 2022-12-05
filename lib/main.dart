@@ -7,9 +7,11 @@ import 'firebase_options.dart';
 import 'modules/signin_module/signin_page.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   FirebaseApp app = await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -19,14 +21,30 @@ void main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown
   ]);
+
   LineSDK.instance.setup('1656791451').then((_) {
     print('LineSDK Prepared');
   }).then((_) => runApp(MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+void initialization() async {
+  // load resources
+  await Future.delayed(Duration(seconds: 3));
+  // whenever your initialization is completed, remove the splash screen:
+  FlutterNativeSplash.remove();
+}
+
+class MyApp extends StatefulWidget {
   @override
-  void initState() {}
+  State<MyApp> createState() => MyAppState();
+}
+
+class MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+    initialization();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,14 +58,14 @@ class MyApp extends StatelessWidget {
       systemNavigationBarIconBrightness: Brightness.light,
     ));
     return MaterialApp(
-      title: 'Flutter UI',
+      title: 'Olive',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
         textTheme: AppTheme.textTheme,
         platform: TargetPlatform.iOS,
-        scaffoldBackgroundColor: const Color(0xFFF89921),
-        backgroundColor: const Color(0xFFF89921),
+        scaffoldBackgroundColor: AppTheme.backgroundPrimary_light,
+        backgroundColor: AppTheme.backgroundPrimary_light,
       ),
       home: SignInPage(),
     );

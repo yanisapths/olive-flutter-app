@@ -66,50 +66,36 @@ class _SigninPageState extends State<SignInPage>
               data: DaycareAppTheme.buildLightTheme(),
               child: Container(
                   child: Scaffold(
-                      backgroundColor:
-                          DaycareAppTheme.buildLightTheme().primaryColor,
+                      backgroundColor: AppTheme.backgroundPrimary_light,
                       body: Stack(children: <Widget>[
-                        InkWell(
-                            splashColor: Colors.transparent,
-                            focusColor: Colors.transparent,
-                            highlightColor: Colors.transparent,
-                            hoverColor: Colors.transparent,
-                            onTap: () {
-                              FocusScope.of(context).requestFocus(FocusNode());
-                            },
-                            child: Column(
-                              children: <Widget>[
-                                // _configCard(),
-                                Padding(
-                                  padding:
-                                      EdgeInsets.only(top: 200, bottom: 12),
-                                  child: Center(
-                                    child: Image.asset(
-                                        'assets/icon/olivelogo.png'),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.only(bottom: 48),
-                                  child: Center(
-                                      child: Text(
-                                    'Find happy places',
-                                    style: TextStyle(
-                                        color: AppTheme.nearlyBlack,
-                                        fontSize: AppTheme.body1.fontSize),
-                                  )),
-                                ),
-                                Center(
-                                    child: ElevatedButton(
-                                        child: Text('Sign In with LINE'),
-                                        onPressed: _signIn,
-                                        style: ElevatedButton.styleFrom(
-                                            backgroundColor:
-                                                AppTheme.nearlyBlack,
-                                            foregroundColor: DaycareAppTheme
-                                                    .buildLightTheme()
-                                                .primaryColor))),
-                              ],
-                            ))
+                        Padding(
+                          padding: EdgeInsets.only(top: 20, bottom: 12),
+                          child: Center(
+                            child: Image.asset('assets/common/bg-login.png'),
+                          ),
+                        ),
+                        Column(
+                          children: <Widget>[
+                            Padding(
+                                padding: EdgeInsets.only(top: 260),
+                                child: Text('เข้าสู่ระบบ',
+                                    style: TextStyle(fontSize: 24))),
+                            Padding(
+                                padding: EdgeInsets.only(top: 16),
+                                child: Center(
+                                    child: ClipRRect(
+                                        child: Material(
+                                            color: Colors.transparent,
+                                            child: IconButton(
+                                              onPressed: () {
+                                                _signIn();
+                                              },
+                                              iconSize: 85,
+                                              icon: Image.asset(
+                                                  'assets/icon/line-logo.png'),
+                                            )))))
+                          ],
+                        )
                       ])))));
     } else {
       return DaycareHomeScreen();
