@@ -62,11 +62,12 @@ class MyAppState extends State<MyApp> {
       title: 'Olive',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        useMaterial3: true,
         primarySwatch: Colors.blue,
         textTheme: AppTheme.textTheme,
         platform: TargetPlatform.iOS,
-        scaffoldBackgroundColor: AppTheme.backgroundPrimary_light,
-        backgroundColor: AppTheme.backgroundPrimary_light,
+        scaffoldBackgroundColor: AppTheme.nearlyWhite,
+        backgroundColor: AppTheme.nearlyWhite,
       ),
       home: SignInPage(),
     );

@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_line_sdk/flutter_line_sdk.dart';
 import 'package:olive/app_theme.dart';
+import 'package:olive/modules/home_module/home_screen.dart';
 
 import '../../common/app_constant.dart';
 import '../../entities/daycare_entities.dart';
+import '../../model/homelist.dart';
 import '../daycare_module/daycare_theme.dart';
-import '../home_module/home_screen.dart';
 
 class SignInPage extends StatefulWidget {
   @override
@@ -23,6 +24,7 @@ class _SigninPageState extends State<SignInPage>
   List<Daycare> daycareList = [];
   DateTime startDate = DateTime.now();
   DateTime endDate = DateTime.now().add(const Duration(days: 5));
+  List<HomeList> homeList = HomeList.homeList;
   static const LINE_ICON_SIZE = 350.00;
 
   final Set<String> _selectedScopes = Set.from(['profile']);
@@ -100,7 +102,13 @@ class _SigninPageState extends State<SignInPage>
                         )
                       ])))));
     } else {
-      return MyHomePage();
+      return HomeLandingPage(
+          userProfile: userProfile!,
+          userEmail: userEmail,
+          accessToken: accessToken!,
+          onSignOutPressed: _signOut,
+          animationController: animationController,
+          homeList: homeList);
     }
   }
 
