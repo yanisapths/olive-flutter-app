@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_line_sdk/flutter_line_sdk.dart';
-import 'package:olive/modules/daycare_module/daycare_theme.dart';
+import 'package:olive/app_theme.dart';
 
-import 'theme.dart';
-import 'widget/user_info_widget.dart';
+import '../../entities/daycare_entities.dart';
+import '../daycare_module/daycare_home_screen.dart';
+import '../daycare_module/daycare_theme.dart';
 
 class SignInPage extends StatefulWidget {
   @override
@@ -12,11 +13,15 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SigninPageState extends State<SignInPage>
-    with AutomaticKeepAliveClientMixin {
+    with AutomaticKeepAliveClientMixin, TickerProviderStateMixin {
   UserProfile? userProfile;
   String? userEmail;
-  StoredAccessToken? _accessToken;
-  // bool _isOnlyWebLogin = false;
+  StoredAccessToken? accessToken;
+  AnimationController? animationController;
+  final ScrollController _scrollController = ScrollController();
+  List<Daycare> daycareList = [];
+  DateTime startDate = DateTime.now();
+  DateTime endDate = DateTime.now().add(const Duration(days: 5));
 
   final Set<String> _selectedScopes = Set.from(['profile']);
 
@@ -25,6 +30,8 @@ class _SigninPageState extends State<SignInPage>
 
   @override
   void initState() {
+    animationController = AnimationController(
+        duration: const Duration(milliseconds: 1000), vsync: this);
     super.initState();
     initPlatformState();
   }
@@ -46,7 +53,7 @@ class _SigninPageState extends State<SignInPage>
 
     setState(() {
       userProfile = userProfile;
-      _accessToken = accessToken;
+      accessToken = accessToken;
     });
   }
 
@@ -54,94 +61,59 @@ class _SigninPageState extends State<SignInPage>
   Widget build(BuildContext context) {
     super.build(context);
     if (userProfile == null) {
-      return Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: <Widget>[
-            _configCard(),
-            Expanded(
-              child: Center(
-                  child: ElevatedButton(
-                      child: Text('Sign In'),
-                      onPressed: _signIn,
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                              DaycareAppTheme.buildLightTheme().backgroundColor,
-                          foregroundColor: textColor))),
-            ),
-          ],
-        ),
-      );
+      return SafeArea(
+          child: Theme(
+              data: DaycareAppTheme.buildLightTheme(),
+              child: Container(
+                  child: Scaffold(
+                      backgroundColor: AppTheme.backgroundPrimary_light,
+                      body: Stack(children: <Widget>[
+                        Padding(
+                          padding: EdgeInsets.only(top: 20, bottom: 12),
+                          child: Center(
+                            child: Image.asset('assets/common/bg-login.png'),
+                          ),
+                        ),
+                        Column(
+                          children: <Widget>[
+                            Padding(
+                                padding: EdgeInsets.only(top: 260),
+                                child: Text('เข้าสู่ระบบ',
+                                    style: TextStyle(fontSize: 24))),
+                            Padding(
+                                padding: EdgeInsets.only(top: 16),
+                                child: Center(
+                                    child: ClipRRect(
+                                        child: Material(
+                                            color: Colors.transparent,
+                                            child: IconButton(
+                                              onPressed: () {
+                                                _signIn();
+                                              },
+                                              iconSize: 85,
+                                              icon: Image.asset(
+                                                  'assets/icon/line-logo.png'),
+                                            )))))
+                          ],
+                        )
+                      ])))));
     } else {
-      return UserInfoWidget(
-        userProfile: userProfile!,
-        userEmail: userEmail,
-        accessToken: _accessToken!,
-        onSignOutPressed: _signOut,
-      );
+      return DaycareHomeScreen();
     }
   }
-
-  Widget _configCard() {
-    return Card(
-      child: Padding(
-        padding: EdgeInsets.all(15.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            _scopeListUI(),
-            SizedBox(
-              height: 10.0,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _scopeListUI() => Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text('Scopes: '),
-          Wrap(
-            children:
-                _scopes.map<Widget>((scope) => _buildScopeChip(scope)).toList(),
-          ),
-        ],
-      );
-
-  Widget _buildScopeChip(String scope) => Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 4.0),
-        child: ChipTheme(
-          data: ChipTheme.of(context).copyWith(brightness: Brightness.dark),
-          child: FilterChip(
-            label: Text(scope, style: TextStyle(color: textColor)),
-            selectedColor: DaycareAppTheme.buildLightTheme().primaryColor,
-            backgroundColor: secondaryBackgroundColor,
-            selected: _selectedScopes.contains(scope),
-            onSelected: (_) {
-              setState(() {
-                _selectedScopes.contains(scope)
-                    ? _selectedScopes.remove(scope)
-                    : _selectedScopes.add(scope);
-              });
-            },
-          ),
-        ),
-      );
 
   void _signIn() async {
     try {
       final result =
           await LineSDK.instance.login(scopes: _selectedScopes.toList());
-      final accessToken = await LineSDK.instance.currentAccessToken;
+      final _accessToken = await LineSDK.instance.currentAccessToken;
 
       final _userEmail = result.accessToken.email;
 
       setState(() {
         userProfile = result.userProfile;
         userEmail = _userEmail;
-        _accessToken = accessToken;
+        accessToken = _accessToken;
       });
     } on PlatformException catch (e) {
       _showDialog(context, e.toString());
@@ -154,7 +126,7 @@ class _SigninPageState extends State<SignInPage>
       setState(() {
         userProfile = null;
         userEmail = null;
-        _accessToken = null;
+        accessToken = null;
       });
     } on PlatformException catch (e) {
       print(e.message);
@@ -174,8 +146,7 @@ class _SigninPageState extends State<SignInPage>
                   Navigator.of(context).pop();
                 },
                 style: TextButton.styleFrom(
-                    foregroundColor: DaycareAppTheme.buildLightTheme()
-                        .secondaryHeaderColor)),
+                    foregroundColor: const Color(0xFFFFFFFF))),
           ],
         );
       },
@@ -183,4 +154,4 @@ class _SigninPageState extends State<SignInPage>
   }
 }
 
-const List<String> _scopes = <String>['profile', 'openid', 'email'];
+// const List<String> _scopes = <String>['profile', 'openid', 'email'];
