@@ -4,6 +4,8 @@ import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, kIsWeb, TargetPlatform;
 
+import 'common/keys.dart';
+
 /// Default [FirebaseOptions] for use with your Firebase apps.
 ///
 /// Example:
@@ -50,25 +52,22 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCBeYoTh-h9tn_JH__lrJ6HYv0ecvX0JFs',
-    appId: '1:153746750887:android:03a4e7c592dc60696cca82',
-    messagingSenderId: '153746750887',
-    projectId: 'happyelders-customer',
-    databaseURL:
-        'https://happyelders-customer-default-rtdb.asia-southeast1.firebasedatabase.app',
+    apiKey: EnvironmentConstants.apiKey,
+    appId: EnvironmentConstants.appIdAndroid,
+    messagingSenderId: EnvironmentConstants.messagingSenderId,
+    projectId: EnvironmentConstants.projectId,
+    databaseURL: EnvironmentConstants.databaseURL,
     storageBucket: 'happyelders-customer.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDJqDvDrYYxOCU11j7W2kSTtDFaZw-TGE0',
-    appId: '1:153746750887:ios:de6eec1dcc06a2bb6cca82',
-    messagingSenderId: '153746750887',
-    projectId: 'happyelders-customer',
-    databaseURL:
-        'https://happyelders-customer-default-rtdb.asia-southeast1.firebasedatabase.app',
+    apiKey: EnvironmentConstants.apiKey,
+    appId: EnvironmentConstants.appIdIos,
+    messagingSenderId: EnvironmentConstants.messagingSenderId,
+    projectId: EnvironmentConstants.projectId,
+    databaseURL: EnvironmentConstants.databaseURL,
     storageBucket: 'happyelders-customer.appspot.com',
-    iosClientId:
-        '153746750887-matiskfqp2h0sg5h41p0ei445bqq9392.apps.googleusercontent.com',
+    iosClientId: EnvironmentConstants.iosClientId,
     iosBundleId: 'com.example.olive',
   );
 }

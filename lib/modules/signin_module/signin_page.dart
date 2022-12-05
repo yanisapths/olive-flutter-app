@@ -5,8 +5,8 @@ import 'package:olive/app_theme.dart';
 
 import '../../common/app_constant.dart';
 import '../../entities/daycare_entities.dart';
-import '../daycare_module/daycare_home_screen.dart';
 import '../daycare_module/daycare_theme.dart';
+import '../home_module/home_screen.dart';
 
 class SignInPage extends StatefulWidget {
   @override
@@ -100,7 +100,7 @@ class _SigninPageState extends State<SignInPage>
                         )
                       ])))));
     } else {
-      return DaycareHomeScreen();
+      return MyHomePage();
     }
   }
 
@@ -155,5 +155,3 @@ class _SigninPageState extends State<SignInPage>
     );
   }
 }
-
-// const List<String> _scopes = <String>['profile', 'openid', 'email'];
