@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'app_theme.dart';
-import 'model/homelist.dart';
-import 'modules/home_module/widget/home_list_view.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_line_sdk/flutter_line_sdk.dart';
+import '../../app_theme.dart';
+import '../../model/homelist.dart';
+import 'widget/home_list_view.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -14,9 +16,13 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   List<HomeList> homeList = HomeList.homeList;
   AnimationController? animationController;
   bool multiple = true;
+  UserProfile? userProfile;
+  String? userEmail;
+  StoredAccessToken? accessToken;
 
   @override
   void initState() {
+    initPlatformState();
     animationController = AnimationController(
         duration: const Duration(milliseconds: 2000), vsync: this);
     super.initState();
@@ -25,6 +31,27 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   Future<bool> getData() async {
     await Future<dynamic>.delayed(const Duration(milliseconds: 0));
     return true;
+  }
+
+  Future<void> initPlatformState() async {
+    UserProfile? userProfile;
+    StoredAccessToken? accessToken;
+
+    try {
+      accessToken = await LineSDK.instance.currentAccessToken;
+      if (accessToken != null) {
+        userProfile = await LineSDK.instance.getProfile();
+      }
+    } on PlatformException catch (e) {
+      print(e.message);
+    }
+
+    if (!mounted) return;
+
+    setState(() {
+      userProfile = userProfile;
+      accessToken = accessToken;
+    });
   }
 
   @override
