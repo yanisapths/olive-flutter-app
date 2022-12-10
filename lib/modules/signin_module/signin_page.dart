@@ -25,8 +25,10 @@ class _SigninPageState extends State<SignInPage>
   DateTime startDate = DateTime.now();
   DateTime endDate = DateTime.now().add(const Duration(days: 5));
   List<HomeList> homeList = HomeList.homeList;
-  static const LINE_ICON_SIZE = 350.00;
-
+  static const LINE_ICON_SIZE = 40.00;
+  static const LOGO_ICON_SIZE = 135.00;
+  static const Color LINE_COLOR = Color(0xFF00B900);
+  static const Color BUTTON_SPLASH_COLOR = Color(0x9BADFF8D);
   final Set<String> _selectedScopes = Set.from(['profile']);
 
   @override
@@ -74,7 +76,7 @@ class _SigninPageState extends State<SignInPage>
                       body: Stack(children: <Widget>[
                         Padding(
                           padding: EdgeInsets.only(
-                              top: PADDING_20, bottom: PADDING_12),
+                              top: PADDING_20, bottom: PADDING_5),
                           child: Center(
                             child: Image.asset('assets/common/bg-login.png'),
                           ),
@@ -83,9 +85,10 @@ class _SigninPageState extends State<SignInPage>
                           children: <Widget>[
                             Padding(
                                 padding: EdgeInsets.only(top: PADDING_230),
-                                child: Text('เข้าสู่ระบบผ่านไลน์แอพพลิเคชัน',
-                                    style:
-                                        TextStyle(fontSize: AppTheme.FONT_20))),
+                                child: Text('เข้าสู่ระบบ',
+                                    style: TextStyle(
+                                        fontSize: AppTheme.FONT_24,
+                                        fontWeight: FontWeight.w600))),
                             Center(
                                 child: ClipRRect(
                                     child: Material(
@@ -94,10 +97,68 @@ class _SigninPageState extends State<SignInPage>
                                           onPressed: () {
                                             _signIn();
                                           },
-                                          iconSize: LINE_ICON_SIZE,
+                                          iconSize: LOGO_ICON_SIZE,
                                           icon: Image.asset(
-                                              'assets/icon/line_icon.png'),
-                                        ))))
+                                              'assets/icon/olive_icon_v3.png'),
+                                        )))),
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: PADDING_80,
+                              ),
+                              child: Text("Olive",
+                                  style: TextStyle(
+                                      fontSize: AppTheme.FONT_16,
+                                      fontWeight: FontWeight.w600)),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(
+                                  left: PADDING_80,
+                                  right: PADDING_80,
+                                  top: PADDING_5),
+                              child: Text("A community-based healthcare",
+                                  style: AppTheme.caption),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(
+                                  left: PADDING_80,
+                                  right: PADDING_80,
+                                  bottom:
+                                      PADDING_30), //apply padding horizontal or vertical only
+                              child: Text("support system",
+                                  style: AppTheme.caption),
+                            ),
+                            Material(
+                              color: LINE_COLOR,
+                              elevation: 8,
+                              borderRadius: BorderRadius.circular(PADDING_48),
+                              clipBehavior: Clip.antiAliasWithSaveLayer,
+                              child: InkWell(
+                                  splashColor: BUTTON_SPLASH_COLOR,
+                                  onTap: () => {_signIn()},
+                                  child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Padding(
+                                            padding: EdgeInsets.only(
+                                                top: PADDING_30,
+                                                bottom: PADDING_30)),
+                                        SizedBox(width: PADDING_40),
+                                        Text('เข้าสู่ระบบผ่านไลน์',
+                                            style: TextStyle(
+                                                color: AppTheme.white,
+                                                fontSize: AppTheme.FONT_16,
+                                                fontWeight: FontWeight.w600)),
+                                        SizedBox(width: PADDING_20),
+                                        Ink.image(
+                                          image: AssetImage(
+                                              'assets/icon/line.png'),
+                                          height: LINE_ICON_SIZE,
+                                          width: LINE_ICON_SIZE,
+                                          fit: BoxFit.cover,
+                                        ),
+                                        SizedBox(width: PADDING_30),
+                                      ])),
+                            )
                           ],
                         )
                       ])))));

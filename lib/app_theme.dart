@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 class AppTheme {
   AppTheme._();
 
-  static const Color backgroundPrimary_light =
-      Color.fromARGB(224, 172, 222, 213);
+  static const Color backgroundPrimary_light = Color(0xFFACDED5);
   static const Color pureBlack = Color.fromARGB(255, 0, 0, 0);
   static const Color notWhite = Color(0xFFEDF0F2);
   static const Color nearlyWhite = Color(0xFFFEFEFE);
@@ -22,7 +21,17 @@ class AppTheme {
   static const Color spacer = Color(0xFFF2F2F2);
   static const String fontName = 'Poppins';
 
+  static const FONT_12 = 12.00;
+  static const FONT_14 = 14.00;
+  static const FONT_16 = 16.00;
+  static const FONT_18 = 18.00;
   static const FONT_20 = 20.00;
+  static const FONT_22 = 22.00;
+  static const FONT_24 = 24.00;
+  static const FONT_26 = 26.00;
+  static const FONT_28 = 28.00;
+  static const FONT_32 = 32.00;
+  static const FONT_36 = 36.00;
 
   static const TextTheme textTheme = TextTheme(
     headline4: display1,
