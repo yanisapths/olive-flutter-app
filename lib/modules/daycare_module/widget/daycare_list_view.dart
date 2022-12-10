@@ -87,7 +87,7 @@ class DaycareListView extends StatelessWidget {
                                                   CrossAxisAlignment.start,
                                               children: <Widget>[
                                                 Text(
-                                                  daycareData!.name,
+                                                  daycareData!.daycareName,
                                                   textAlign: TextAlign.left,
                                                   style: TextStyle(
                                                     fontWeight: FontWeight.w600,

@@ -38,7 +38,7 @@ class DaycareBloc extends Bloc<DaycareBlocEvent, DaycareBlocState> {
 
   sendFetchDaycareRequest() async {
     final networkHelper = NetworkHelper();
-    final data = await networkHelper.fetchDaycares(DAYCARE_URL);
+    final data = await networkHelper.fetchDaycares(DAYCARE_URL_DEV);
     return data;
   }
 }
