@@ -2,6 +2,9 @@
 const PADDING_5 = 5.00;
 const PADDING_10 = 10.00;
 const PADDING_12 = 12.00;
+const PADDING_14 = 14.00;
+const PADDING_16 = 16.00;
+const PADDING_18 = 18.00;
 const PADDING_20 = 20.00;
 const PADDING_22 = 22.00;
 const PADDING_24 = 24.00;
@@ -30,3 +33,5 @@ const PADDING_230 = 230.00;
 const SPLASHSCREEN_DURATION = Duration(seconds: 3);
 const ANIMATIONCONTROLLER_DURATION = Duration(milliseconds: 1000);
 const ANIMATIONCONTROLLER_DURATION_2000 = Duration(milliseconds: 2000);
+
+const BACK_ARROW_SIZE = 60.00;

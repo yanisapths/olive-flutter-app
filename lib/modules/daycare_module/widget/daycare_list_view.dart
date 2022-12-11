@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:olive/modules/daycare_module/daycare_detail_module/daycare_detail_screen.dart';
+import '../../../app_theme.dart';
 import '../../../entities/daycare_entity.dart';
 import '../daycare_theme.dart';
 
@@ -71,7 +73,10 @@ class DaycareListView extends StatelessWidget {
                                         context,
                                         MaterialPageRoute<dynamic>(
                                             builder: (BuildContext context) =>
-                                                DaycareDetailScreen()),
+                                                DaycareDetailScreen(
+                                                  callBack: callBack,
+                                                  daycareData: daycareData,
+                                                )),
                                       );
                                     },
                                     child: Image.network(
@@ -97,14 +102,21 @@ class DaycareListView extends StatelessWidget {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: <Widget>[
-                                                Text(
-                                                  daycareData!.daycareName,
-                                                  textAlign: TextAlign.left,
-                                                  style: TextStyle(
-                                                    fontWeight: FontWeight.w600,
-                                                    fontSize: 22,
-                                                  ),
-                                                ),
+                                                Text(daycareData!.daycareName,
+                                                    textAlign: TextAlign.left,
+                                                    overflow: TextOverflow.fade,
+                                                    maxLines: 1,
+                                                    softWrap: false,
+                                                    style: GoogleFonts
+                                                        .notoSansThai(
+                                                            textStyle:
+                                                                TextStyle(
+                                                      fontSize:
+                                                          AppTheme.FONT_24,
+                                                      color: AppTheme.pureBlack,
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                    ))),
                                                 Row(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.center,
@@ -113,6 +125,10 @@ class DaycareListView extends StatelessWidget {
                                                   children: <Widget>[
                                                     Text(
                                                       daycareData!.address,
+                                                      overflow:
+                                                          TextOverflow.fade,
+                                                      maxLines: 1,
+                                                      softWrap: false,
                                                       style: TextStyle(
                                                           fontSize: 14,
                                                           color: Colors.grey
