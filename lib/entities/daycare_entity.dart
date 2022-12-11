@@ -1,8 +1,7 @@
-// To parse this JSON data, do
-//
-// final daycare = daycareFromJson(jsonString);
-
 import 'dart:convert';
+
+import 'appointment_entity.dart';
+import 'review_entity.dart';
 
 List<Daycare> daycareFromJson(String str) =>
     List<Daycare>.from(json.decode(str).map((x) => Daycare.fromJson(x)));
@@ -21,9 +20,10 @@ class Daycare {
     required this.email,
     required this.imageUrl,
     required this.approvalStatus,
-    required this.appointmentList,
+    this.appointmentList,
     required this.daycareId,
-    required this.v,
+    required this.description,
+    this.reviews,
   });
 
   String id;
@@ -35,9 +35,10 @@ class Daycare {
   String email;
   String imageUrl;
   String approvalStatus;
-  dynamic appointmentList;
+  List<Appointment>? appointmentList;
+  List<Review>? reviews;
   String daycareId;
-  int v;
+  String description;
 
   factory Daycare.fromJson(Map<String, dynamic> json) => Daycare(
         id: json["_id"],
@@ -49,9 +50,15 @@ class Daycare {
         email: json["email"],
         imageUrl: json["imageUrl"],
         approvalStatus: json["approvalStatus"],
-        appointmentList: json["appointmentList"],
+        appointmentList: json["appointmentList"] == null
+            ? null
+            : List<Appointment>.from(
+                json["appointmentList"].map((x) => Appointment.fromJson(x))),
         daycareId: json["daycare_id"],
-        v: json["__v"],
+        description: json["description"] == null ? null : json["description"],
+        reviews: json["reviews"] == null
+            ? null
+            : List<Review>.from(json["reviews"].map((x) => Review.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -64,9 +71,10 @@ class Daycare {
         "email": email,
         "imageUrl": imageUrl,
         "approvalStatus": approvalStatus,
-        "appointmentList": appointmentList,
+        "appointmentList": appointmentList == null ? null : appointmentList,
         "daycare_id": daycareId,
-        "__v": v,
+        "description": description,
+        "reviews": reviews == null ? null : reviews,
       };
 }
 

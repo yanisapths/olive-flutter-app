@@ -3,8 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_line_sdk/flutter_line_sdk.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
-
-import '../../entities/daycare_entities.dart';
+import 'package:olive/entities/daycare_entity.dart';
 import '../service_module/hotel_booking/calendar_popup_view.dart';
 import '../service_module/hotel_booking/filters_screen.dart';
 import 'bloc/daycare_list_bloc.dart';

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
-import '../../../entities/daycare_entities.dart';
+import 'package:olive/modules/daycare_module/daycare_detail_module/daycare_detail_screen.dart';
+import '../../../entities/daycare_entity.dart';
 import '../daycare_theme.dart';
 
 class DaycareListView extends StatelessWidget {
@@ -12,18 +12,12 @@ class DaycareListView extends StatelessWidget {
     this.animation,
     this.daycareData,
     this.callBack,
-    // required this.userProfile,
-    // this.userEmail,
-    // required this.accessToken,
   }) : super(key: key);
 
   final Daycare? daycareData;
   final VoidCallback? callBack;
   final AnimationController? animationController;
   final Animation<double>? animation;
-  // final UserProfile userProfile;
-  // final String? userEmail;
-  // final StoredAccessToken accessToken;
 
   @override
   Widget build(BuildContext context) {
@@ -59,14 +53,31 @@ class DaycareListView extends StatelessWidget {
                         child: Stack(
                           children: <Widget>[
                             Column(
+                              // AspectRatio(
+                              //     aspectRatio: 2,
+                              //     child: Image.network(
+                              //       daycareData!.imageUrl,
+                              //       fit: BoxFit.cover,
+                              //     ),
+                              //   ),
                               children: <Widget>[
-                                AspectRatio(
-                                  aspectRatio: 2,
-                                  child: Image.network(
-                                    daycareData!.imageUrl,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
+                                InkWell(
+                                    splashColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    onTap: () {
+                                      Navigator.push<dynamic>(
+                                        context,
+                                        MaterialPageRoute<dynamic>(
+                                            builder: (BuildContext context) =>
+                                                DaycareDetailScreen()),
+                                      );
+                                    },
+                                    child: Image.network(
+                                      daycareData!.imageUrl,
+                                      fit: BoxFit.cover,
+                                    )),
                                 Container(
                                   color: DaycareAppTheme.buildLightTheme()
                                       .backgroundColor,

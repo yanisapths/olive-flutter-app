@@ -5,7 +5,7 @@ import 'package:olive/app_theme.dart';
 import 'package:olive/modules/home_module/home_screen.dart';
 
 import '../../common/app_constant.dart';
-import '../../entities/daycare_entities.dart';
+import '../../entities/daycare_entity.dart';
 import '../../model/homelist.dart';
 import '../daycare_module/daycare_theme.dart';
 
