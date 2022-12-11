@@ -4,13 +4,16 @@ class AppTheme {
   AppTheme._();
 
   static const Color backgroundPrimary_light = Color(0xFFACDED5);
-  static const Color pureBlack = Color.fromARGB(255, 0, 0, 0);
+  static const Color pureBlack = Color(0xFF000000);
   static const Color notWhite = Color(0xFFEDF0F2);
   static const Color nearlyWhite = Color(0xFFFEFEFE);
   static const Color white = Color(0xFFFFFFFF);
   static const Color nearlyBlack = Color(0xFF213333);
   static const Color grey = Color(0xFF3A5160);
   static const Color dark_grey = Color(0xFF313A44);
+  static const Color primary_main = Color(0xFF7BC6B7);
+  static const Color secondaryGreenDark = Color(0xFF0C806A);
+  static const Color secondaryGreenLight = Color(0xFF44B6A1);
 
   static const Color darkText = Color(0xFF253840);
   static const Color darkerText = Color(0xFF17262A);

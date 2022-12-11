@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_line_sdk/flutter_line_sdk.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'app_theme.dart';
 import 'common/app_constant.dart';
 import 'firebase_options.dart';
@@ -64,7 +65,8 @@ class MyAppState extends State<MyApp> {
       theme: ThemeData(
         useMaterial3: true,
         primarySwatch: Colors.blue,
-        textTheme: AppTheme.textTheme,
+        textTheme:
+            GoogleFonts.notoSansThaiTextTheme(Theme.of(context).textTheme),
         platform: TargetPlatform.iOS,
         scaffoldBackgroundColor: AppTheme.nearlyWhite,
         backgroundColor: AppTheme.nearlyWhite,
