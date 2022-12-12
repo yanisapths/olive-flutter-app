@@ -1,5 +1,9 @@
 // Padding
+const PADDING_2 = 2.00;
+const PADDING_4 = 4.00;
 const PADDING_5 = 5.00;
+const PADDING_6 = 6.00;
+const PADDING_8 = 8.00;
 const PADDING_10 = 10.00;
 const PADDING_12 = 12.00;
 const PADDING_14 = 14.00;

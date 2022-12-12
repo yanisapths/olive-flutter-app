@@ -77,86 +77,75 @@ class _DaycareHomeScreenState extends State<DaycareHomeScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Theme(
-      data: DaycareAppTheme.buildLightTheme(),
-      child: Container(
-        child: Scaffold(
-          body: Stack(
+    return Stack(
+      children: <Widget>[
+        InkWell(
+          splashColor: Colors.transparent,
+          focusColor: Colors.transparent,
+          highlightColor: Colors.transparent,
+          hoverColor: Colors.transparent,
+          onTap: () {
+            FocusScope.of(context).requestFocus(FocusNode());
+          },
+          child: Column(
             children: <Widget>[
-              InkWell(
-                splashColor: Colors.transparent,
-                focusColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                hoverColor: Colors.transparent,
-                onTap: () {
-                  FocusScope.of(context).requestFocus(FocusNode());
-                },
-                child: Column(
-                  children: <Widget>[
-                    getAppBarUI(),
-                    Expanded(
-                      child: NestedScrollView(
-                        controller: _scrollController,
-                        headerSliverBuilder:
-                            (BuildContext context, bool innerBoxIsScrolled) {
-                          return <Widget>[
-                            SliverList(
-                              delegate: SliverChildBuilderDelegate(
-                                  (BuildContext context, int index) {
-                                return Column(
-                                  children: <Widget>[
-                                    getSearchBarUI(),
-                                    getTimeDateUI(),
-                                  ],
-                                );
-                              }, childCount: 1),
-                            ),
-                            SliverPersistentHeader(
-                              pinned: true,
-                              floating: true,
-                              delegate: ContestTabHeader(
-                                getFilterBarUI(),
-                              ),
-                            ),
-                          ];
-                        },
-                        body: Container(
-                          color:
-                              DaycareAppTheme.buildLightTheme().backgroundColor,
-                          child: ListView.builder(
-                            itemCount: daycareList.length,
-                            padding: const EdgeInsets.only(top: 8),
-                            scrollDirection: Axis.vertical,
-                            itemBuilder: (BuildContext context, int index) {
-                              final int count = daycareList.length > 10
-                                  ? 10
-                                  : daycareList.length;
-                              final Animation<double> animation =
-                                  Tween<double>(begin: 0.0, end: 1.0).animate(
-                                      CurvedAnimation(
-                                          parent: animationController!,
-                                          curve: Interval(
-                                              (1 / count) * index, 1.0,
-                                              curve: Curves.fastOutSlowIn)));
-                              animationController?.forward();
-                              return DaycareListView(
-                                callBack: () {},
-                                daycareData: daycareList[index],
-                                animation: animation,
-                                animationController: animationController!,
-                              );
-                            },
-                          ),
-                        ),
+              Expanded(
+                child: NestedScrollView(
+                  controller: _scrollController,
+                  headerSliverBuilder:
+                      (BuildContext context, bool innerBoxIsScrolled) {
+                    return <Widget>[
+                      SliverList(
+                        delegate: SliverChildBuilderDelegate(
+                            (BuildContext context, int index) {
+                          return Column(
+                            children: <Widget>[
+                              // getSearchBarUI(),
+                              // getTimeDateUI(),
+                            ],
+                          );
+                        }, childCount: 1),
                       ),
-                    )
-                  ],
+                      // SliverPersistentHeader(
+                      //   pinned: true,
+                      //   floating: true,
+                      //   delegate: ContestTabHeader(
+                      //     // getFilterBarUI(),
+                      //   ),
+                      // ),
+                    ];
+                  },
+                  body: Container(
+                    color: DaycareAppTheme.buildLightTheme().backgroundColor,
+                    child: ListView.builder(
+                      itemCount: daycareList.length,
+                      padding: const EdgeInsets.only(top: 8),
+                      scrollDirection: Axis.vertical,
+                      itemBuilder: (BuildContext context, int index) {
+                        final int count =
+                            daycareList.length > 10 ? 10 : daycareList.length;
+                        final Animation<double> animation =
+                            Tween<double>(begin: 0.0, end: 1.0).animate(
+                                CurvedAnimation(
+                                    parent: animationController!,
+                                    curve: Interval((1 / count) * index, 1.0,
+                                        curve: Curves.fastOutSlowIn)));
+                        animationController?.forward();
+                        return DaycareListView(
+                          callBack: () {},
+                          daycareData: daycareList[index],
+                          animation: animation,
+                          animationController: animationController!,
+                        );
+                      },
+                    ),
+                  ),
                 ),
-              ),
+              )
             ],
           ),
         ),
-      ),
+      ],
     );
   }
 
@@ -297,7 +286,7 @@ class _DaycareHomeScreenState extends State<DaycareHomeScreen>
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(right: 8),
+            padding: const EdgeInsets.only(right: 6),
             child: Container(
               width: 1,
               height: 42,

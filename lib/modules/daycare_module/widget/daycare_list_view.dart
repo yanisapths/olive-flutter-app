@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:olive/common/app_constant.dart';
 import 'package:olive/modules/daycare_module/daycare_detail_module/daycare_detail_screen.dart';
-import '../../../app_theme.dart';
 import '../../../entities/daycare_entity.dart';
 import '../daycare_theme.dart';
 
@@ -33,7 +30,7 @@ class DaycareListView extends StatelessWidget {
                     0.0, 50 * (1.0 - animation!.value), 0.0),
                 child: Padding(
                   padding: const EdgeInsets.only(
-                      left: 24, right: 24, top: 8, bottom: 16),
+                      left: 50, right: 50, top: 8, bottom: 16),
                   child: InkWell(
                     splashColor: Colors.transparent,
                     onTap: callBack,
@@ -43,7 +40,7 @@ class DaycareListView extends StatelessWidget {
                             const BorderRadius.all(Radius.circular(16.0)),
                         boxShadow: <BoxShadow>[
                           BoxShadow(
-                            color: Colors.grey.withOpacity(0.6),
+                            color: Colors.grey.withOpacity(0.4),
                             offset: const Offset(4, 4),
                             blurRadius: 16,
                           ),
@@ -51,17 +48,10 @@ class DaycareListView extends StatelessWidget {
                       ),
                       child: ClipRRect(
                         borderRadius:
-                            const BorderRadius.all(Radius.circular(4.0)),
+                            const BorderRadius.all(Radius.circular(PADDING_22)),
                         child: Stack(
                           children: <Widget>[
                             Column(
-                              // AspectRatio(
-                              //     aspectRatio: 2,
-                              //     child: Image.network(
-                              //       daycareData!.imageUrl,
-                              //       fit: BoxFit.cover,
-                              //     ),
-                              //   ),
                               children: <Widget>[
                                 InkWell(
                                     splashColor: Colors.transparent,
@@ -79,10 +69,12 @@ class DaycareListView extends StatelessWidget {
                                                 )),
                                       );
                                     },
-                                    child: Image.network(
-                                      daycareData!.imageUrl,
-                                      fit: BoxFit.cover,
-                                    )),
+                                    child: AspectRatio(
+                                        aspectRatio: 2,
+                                        child: Image.network(
+                                          daycareData!.imageUrl,
+                                          fit: BoxFit.cover,
+                                        ))),
                                 Container(
                                   color: DaycareAppTheme.buildLightTheme()
                                       .backgroundColor,
@@ -92,148 +84,9 @@ class DaycareListView extends StatelessWidget {
                                         CrossAxisAlignment.start,
                                     children: <Widget>[
                                       Expanded(
-                                        child: Container(
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 16, top: 8, bottom: 8),
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: <Widget>[
-                                                Text(daycareData!.daycareName,
-                                                    textAlign: TextAlign.left,
-                                                    overflow: TextOverflow.fade,
-                                                    maxLines: 1,
-                                                    softWrap: false,
-                                                    style: GoogleFonts
-                                                        .notoSansThai(
-                                                            textStyle:
-                                                                TextStyle(
-                                                      fontSize:
-                                                          AppTheme.FONT_24,
-                                                      color: AppTheme.pureBlack,
-                                                      fontWeight:
-                                                          FontWeight.w700,
-                                                    ))),
-                                                Row(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  children: <Widget>[
-                                                    Text(
-                                                      daycareData!.address,
-                                                      overflow:
-                                                          TextOverflow.fade,
-                                                      maxLines: 1,
-                                                      softWrap: false,
-                                                      style: TextStyle(
-                                                          fontSize: 14,
-                                                          color: Colors.grey
-                                                              .withOpacity(
-                                                                  0.8)),
-                                                    ),
-                                                    const SizedBox(
-                                                      width: 4,
-                                                    ),
-                                                    Icon(
-                                                      FontAwesomeIcons
-                                                          .locationDot,
-                                                      size: 12,
-                                                      color: DaycareAppTheme
-                                                              .buildLightTheme()
-                                                          .primaryColor,
-                                                    ),
-                                                  ],
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          top: 4),
-                                                  child: Row(
-                                                    children: <Widget>[
-                                                      RatingBar(
-                                                        initialRating: 3.0,
-                                                        direction:
-                                                            Axis.horizontal,
-                                                        allowHalfRating: true,
-                                                        itemCount: 5,
-                                                        itemSize: 24,
-                                                        ratingWidget:
-                                                            RatingWidget(
-                                                          full: Icon(
-                                                            Icons
-                                                                .star_rate_rounded,
-                                                            color: DaycareAppTheme
-                                                                    .buildLightTheme()
-                                                                .primaryColor,
-                                                          ),
-                                                          half: Icon(
-                                                            Icons
-                                                                .star_half_rounded,
-                                                            color: DaycareAppTheme
-                                                                    .buildLightTheme()
-                                                                .primaryColor,
-                                                          ),
-                                                          empty: Icon(
-                                                            Icons
-                                                                .star_border_rounded,
-                                                            color: DaycareAppTheme
-                                                                    .buildLightTheme()
-                                                                .primaryColor,
-                                                          ),
-                                                        ),
-                                                        itemPadding:
-                                                            EdgeInsets.zero,
-                                                        onRatingUpdate:
-                                                            (rating) {
-                                                          print(rating);
-                                                        },
-                                                      ),
-                                                      Text(
-                                                        ' 5 Reviews',
-                                                        style: TextStyle(
-                                                            fontSize: 14,
-                                                            color: Colors.grey
-                                                                .withOpacity(
-                                                                    0.8)),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            right: 16, top: 8),
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.end,
-                                          children: <Widget>[
-                                            Text(
-                                              '\$20',
-                                              textAlign: TextAlign.left,
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.w600,
-                                                fontSize: 22,
-                                              ),
-                                            ),
-                                            Text(
-                                              '/per night',
-                                              style: TextStyle(
-                                                  fontSize: 14,
-                                                  color: Colors.grey
-                                                      .withOpacity(0.8)),
-                                            ),
-                                          ],
-                                        ),
+                                        child: Padding(
+                                            padding: EdgeInsets.all(60),
+                                            child: Container()),
                                       ),
                                     ],
                                   ),

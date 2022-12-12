@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:olive/common/app_constant.dart';
 import 'package:olive/modules/home_module/widget/home_list_view.dart';
 import '../../../app_theme.dart';
 import '../../../model/homelist.dart';
 
 class HomeListScreen extends StatefulWidget {
   const HomeListScreen({Key? key}) : super(key: key);
-
   @override
   HomeListState createState() => HomeListState();
 }
@@ -115,38 +113,6 @@ class HomeListState extends State<HomeListScreen>
               );
             }
           },
-        ),
-        bottomNavigationBar: BottomAppBar(
-            color: AppTheme.white,
-            elevation: PADDING_12,
-            child: Padding(
-                padding: const EdgeInsets.all(12),
-                child: OverflowBar(
-                    overflowAlignment: OverflowBarAlignment.center,
-                    alignment: MainAxisAlignment.center,
-                    overflowSpacing: 5.0,
-                    children: <Widget>[
-                      Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          IconButton(
-                            icon: const Icon(Icons.home),
-                            onPressed: () {},
-                          ),
-                          Text('หน้าหลัก'),
-                        ],
-                      ),
-                      const SizedBox(width: 100.00),
-                      Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          IconButton(
-                            icon: const Icon(Icons.person_outline),
-                            onPressed: () {},
-                          ),
-                          Text('บัญชี'),
-                        ],
-                      ),
-                    ]))));
+        ));
   }
 }

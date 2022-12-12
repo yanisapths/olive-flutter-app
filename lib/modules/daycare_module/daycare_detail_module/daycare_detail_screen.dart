@@ -18,7 +18,8 @@ class DaycareDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        scaffoldBackgroundColor: AppTheme.primary_main,
+        backgroundColor: AppTheme.nearlyWhite,
+        scaffoldBackgroundColor: AppTheme.nearlyWhite,
         useMaterial3: true,
       ),
       home: Scaffold(
@@ -29,8 +30,9 @@ class DaycareDetailScreen extends StatelessWidget {
                 handle:
                     NestedScrollView.sliverOverlapAbsorberHandleFor(context),
                 sliver: SliverAppBar.large(
+                  automaticallyImplyLeading: false,
                   leading: IconButton(
-                    splashColor: AppTheme.backgroundPrimary_light,
+                    splashColor: AppTheme.nearlyWhite,
                     onPressed: () {
                       Navigator.push(
                         context,
@@ -39,12 +41,12 @@ class DaycareDetailScreen extends StatelessWidget {
                       );
                     },
                     icon: Icon(Icons.chevron_left,
-                        size: BACK_ARROW_SIZE, color: AppTheme.pureBlack),
+                        size: BACK_ARROW_SIZE, color: AppTheme.white),
                   ),
                   snap: false,
                   floating: false,
                   pinned: true,
-                  expandedHeight: MediaQuery.of(context).size.height * 0.50,
+                  expandedHeight: MediaQuery.of(context).size.height * 0.40,
                   flexibleSpace: Stack(
                     children: [
                       Positioned(
@@ -63,9 +65,10 @@ class DaycareDetailScreen extends StatelessWidget {
                           Padding(
                               padding: EdgeInsets.all(0),
                               child: Container(
-                                height: 80,
+                                height: 100,
+                                width: 500,
                                 decoration: BoxDecoration(
-                                  color: AppTheme.primary_main,
+                                  color: AppTheme.nearlyWhite,
                                   boxShadow: [
                                     BoxShadow(
                                       color:
@@ -141,7 +144,7 @@ class DaycareDetailScreen extends StatelessWidget {
         ),
         bottomNavigationBar: BottomAppBar(
           elevation: PADDING_10,
-          color: AppTheme.primary_main,
+          color: AppTheme.nearlyWhite,
           child: Padding(
               padding: const EdgeInsets.all(PADDING_18),
               child: OverflowBar(

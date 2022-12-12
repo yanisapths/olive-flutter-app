@@ -64,7 +64,7 @@ class MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         useMaterial3: true,
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.lightBlue,
         textTheme:
             GoogleFonts.notoSansThaiTextTheme(Theme.of(context).textTheme),
         platform: TargetPlatform.iOS,

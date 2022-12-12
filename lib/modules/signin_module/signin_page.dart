@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_line_sdk/flutter_line_sdk.dart';
 import 'package:olive/app_theme.dart';
-import 'package:olive/modules/home_module/home_screen.dart';
 
 import '../../common/app_constant.dart';
 import '../../entities/daycare_entity.dart';
 import '../../model/homelist.dart';
 import '../daycare_module/daycare_theme.dart';
+import '../home_module/list_poc.dart';
 
 class SignInPage extends StatefulWidget {
   @override
@@ -163,13 +163,19 @@ class _SigninPageState extends State<SignInPage>
                         )
                       ])))));
     } else {
-      return HomeLandingPage(
-          userProfile: userProfile!,
-          userEmail: userEmail,
-          accessToken: accessToken!,
-          onSignOutPressed: _signOut,
-          animationController: animationController,
-          homeList: homeList);
+      return ScrollPoc(
+        userProfile: userProfile!,
+        userEmail: userEmail,
+        accessToken: accessToken!,
+        onSignOutPressed: _signOut,
+      );
+      // return HomePage(
+      //     userProfile: userProfile!,
+      //     userEmail: userEmail,
+      //     accessToken: accessToken!,
+      //     onSignOutPressed: _signOut,
+      //     animationController: animationController,
+      //     homeList: homeList);
     }
   }
 

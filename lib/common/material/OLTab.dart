@@ -11,9 +11,9 @@ class TabBarAction extends StatelessWidget {
     return Column(
       children: [
         Container(
-          height: PADDING_46,
+          height: PADDING_42,
           decoration: BoxDecoration(
-            color: AppTheme.primary_main,
+            color: AppTheme.nearlyWhite,
             borderRadius: BorderRadius.circular(PADDING_60),
           ),
           child: TabBar(

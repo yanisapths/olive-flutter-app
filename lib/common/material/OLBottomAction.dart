@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:olive/app_theme.dart';
+import 'package:olive/modules/appointment_module/appointment_screen.dart';
 
 import '../../../entities/daycare_entity.dart';
-import '../../modules/daycare_module/daycare_home_screen.dart';
 import '../app_constant.dart';
 
 class ButtonAction extends StatelessWidget {
@@ -23,7 +23,7 @@ class ButtonAction extends StatelessWidget {
           onTap: () => {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => DaycareHomeScreen()),
+                  MaterialPageRoute(builder: (context) => AppointmentScreen()),
                 )
               },
           child: Row(
