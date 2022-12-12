@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:olive/common/app_constant.dart';
 import 'package:olive/modules/daycare_module/daycare_detail_module/daycare_detail_screen.dart';
+import '../../../app_theme.dart';
 import '../../../entities/daycare_entity.dart';
 import '../daycare_theme.dart';
 
@@ -30,7 +32,7 @@ class DaycareListView extends StatelessWidget {
                     0.0, 50 * (1.0 - animation!.value), 0.0),
                 child: Padding(
                   padding: const EdgeInsets.only(
-                      left: 50, right: 50, top: 8, bottom: 16),
+                      left: 50, right: 50, top: 8, bottom: 20),
                   child: InkWell(
                     splashColor: Colors.transparent,
                     onTap: callBack,
@@ -40,15 +42,15 @@ class DaycareListView extends StatelessWidget {
                             const BorderRadius.all(Radius.circular(16.0)),
                         boxShadow: <BoxShadow>[
                           BoxShadow(
-                            color: Colors.grey.withOpacity(0.4),
-                            offset: const Offset(4, 4),
+                            color: AppTheme.lightGrey.withOpacity(0.2),
+                            offset: const Offset(1, 1),
                             blurRadius: 16,
                           ),
                         ],
                       ),
                       child: ClipRRect(
                         borderRadius:
-                            const BorderRadius.all(Radius.circular(PADDING_22)),
+                            const BorderRadius.all(Radius.circular(PADDING_20)),
                         child: Stack(
                           children: <Widget>[
                             Column(
@@ -76,17 +78,61 @@ class DaycareListView extends StatelessWidget {
                                           fit: BoxFit.cover,
                                         ))),
                                 Container(
+                                  height: PADDING_120,
                                   color: DaycareAppTheme.buildLightTheme()
                                       .backgroundColor,
                                   child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: <Widget>[
                                       Expanded(
                                         child: Padding(
-                                            padding: EdgeInsets.all(60),
-                                            child: Container()),
+                                            padding: EdgeInsets.all(PADDING_12),
+                                            child: Column(
+                                              children: [
+                                                Padding(
+                                                  padding: EdgeInsets.all(0),
+                                                  child: Text(
+                                                      daycareData!.daycareName,
+                                                      overflow:
+                                                          TextOverflow.fade,
+                                                      maxLines: 1,
+                                                      softWrap: false,
+                                                      style: GoogleFonts.notoSansThai(
+                                                          textStyle: TextStyle(
+                                                              fontSize: AppTheme
+                                                                  .FONT_20,
+                                                              color: AppTheme
+                                                                  .pureBlack,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w800,
+                                                              letterSpacing:
+                                                                  0.5))),
+                                                ),
+                                                Padding(
+                                                  padding: EdgeInsets.all(0),
+                                                  child: Text(
+                                                      daycareData!.address,
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                      maxLines: 1,
+                                                      softWrap: false,
+                                                      style: GoogleFonts.notoSansThai(
+                                                          textStyle: TextStyle(
+                                                              fontSize: AppTheme
+                                                                  .FONT_12,
+                                                              color: AppTheme
+                                                                  .pureBlack,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w800,
+                                                              letterSpacing:
+                                                                  0.5))),
+                                                ),
+                                              ],
+                                            )),
                                       ),
                                     ],
                                   ),

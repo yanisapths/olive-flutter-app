@@ -28,10 +28,22 @@ const PADDING_72 = 72.00;
 const PADDING_80 = 80.00;
 const PADDING_84 = 84.00;
 const PADDING_92 = 92.00;
+const PADDING_94 = 94.00;
 const PADDING_96 = 96.00;
-
+const PADDING_100 = 100.00;
+const PADDING_120 = 120.00;
+const PADDING_140 = 140.00;
+const PADDING_160 = 160.00;
+const PADDING_180 = 180.00;
+const PADDING_200 = 200.00;
 const PADDING_220 = 220.00;
 const PADDING_230 = 230.00;
+const PADDING_240 = 240.00;
+const PADDING_260 = 260.00;
+const PADDING_280 = 280.00;
+
+const PADDING_300 = 300.00;
+const PADDING_350 = 350.00;
 
 // Duration
 const SPLASHSCREEN_DURATION = Duration(seconds: 3);

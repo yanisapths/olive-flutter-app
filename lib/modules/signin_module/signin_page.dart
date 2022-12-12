@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_line_sdk/flutter_line_sdk.dart';
 import 'package:olive/app_theme.dart';
+import 'package:olive/common/share_preferences.dart';
 
 import '../../common/app_constant.dart';
 import '../../entities/daycare_entity.dart';
-import '../../model/homelist.dart';
+import '../../entities/user_profile.dart';
 import '../daycare_module/daycare_theme.dart';
 import '../home_module/list_poc.dart';
 
@@ -20,11 +21,9 @@ class _SigninPageState extends State<SignInPage>
   String? userEmail;
   StoredAccessToken? accessToken;
   AnimationController? animationController;
-  final ScrollController _scrollController = ScrollController();
   List<Daycare> daycareList = [];
   DateTime startDate = DateTime.now();
   DateTime endDate = DateTime.now().add(const Duration(days: 5));
-  List<HomeList> homeList = HomeList.homeList;
   static const LINE_ICON_SIZE = 40.00;
   static const LOGO_ICON_SIZE = 135.00;
   static const Color LINE_COLOR = Color(0xFF00B900);
@@ -40,12 +39,12 @@ class _SigninPageState extends State<SignInPage>
         duration: ANIMATIONCONTROLLER_DURATION, vsync: this);
     super.initState();
     initPlatformState();
+    print('initPlatformState');
   }
 
   Future<void> initPlatformState() async {
     UserProfile? userProfile;
     StoredAccessToken? accessToken;
-
     try {
       accessToken = await LineSDK.instance.currentAccessToken;
       if (accessToken != null) {
@@ -66,7 +65,13 @@ class _SigninPageState extends State<SignInPage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    if (userProfile == null) {
+    if (userProfile != null) {
+      return ScrollPoc(
+        userProfile: userProfile!,
+        userEmail: userEmail,
+        accessToken: accessToken!,
+      );
+    } else if (userProfile == null) {
       return SafeArea(
           child: Theme(
               data: DaycareAppTheme.buildLightTheme(),
@@ -163,19 +168,12 @@ class _SigninPageState extends State<SignInPage>
                         )
                       ])))));
     } else {
+      saveToPref();
       return ScrollPoc(
         userProfile: userProfile!,
         userEmail: userEmail,
         accessToken: accessToken!,
-        onSignOutPressed: _signOut,
       );
-      // return HomePage(
-      //     userProfile: userProfile!,
-      //     userEmail: userEmail,
-      //     accessToken: accessToken!,
-      //     onSignOutPressed: _signOut,
-      //     animationController: animationController,
-      //     homeList: homeList);
     }
   }
 
@@ -195,6 +193,21 @@ class _SigninPageState extends State<SignInPage>
     } on PlatformException catch (e) {
       _showDialog(context, e.toString());
     }
+  }
+
+  saveToPref() async {
+    CommonSharePreferences prefs = CommonSharePreferences();
+    User user = User();
+
+    await prefs.setUserImageUrl(userProfile!.pictureUrl.toString());
+    await prefs.setUserDisplayName(userProfile!.displayName.toString());
+    await prefs.setAccessToken(accessToken.toString());
+    user.setUserProfile(userProfile!);
+    user.setAccessToken(accessToken!);
+    print('save to preferences');
+    print('save to user: ' +
+        user.currentUserProfile.displayName +
+        user.currentAccessToken.toString());
   }
 
   void _signOut() async {

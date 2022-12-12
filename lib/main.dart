@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'app_theme.dart';
 import 'common/app_constant.dart';
 import 'firebase_options.dart';
+import 'modules/home_module/list_poc.dart';
 import 'modules/signin_module/signin_page.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:firebase_core/firebase_core.dart';
@@ -42,10 +43,35 @@ class MyApp extends StatefulWidget {
 }
 
 class MyAppState extends State<MyApp> {
+  UserProfile? userProfile;
+  String? userEmail;
+  StoredAccessToken? accessToken;
   @override
   void initState() {
     super.initState();
     initialization();
+    initPlatformState();
+    print('main initPlatformState');
+  }
+
+  Future<void> initPlatformState() async {
+    UserProfile? userProfile;
+    StoredAccessToken? accessToken;
+    try {
+      accessToken = await LineSDK.instance.currentAccessToken;
+      if (accessToken != null) {
+        userProfile = await LineSDK.instance.getProfile();
+      }
+    } on PlatformException catch (e) {
+      print(e.message);
+    }
+
+    if (!mounted) return;
+
+    setState(() {
+      userProfile = userProfile;
+      accessToken = accessToken;
+    });
   }
 
   @override
@@ -71,7 +97,13 @@ class MyAppState extends State<MyApp> {
         scaffoldBackgroundColor: AppTheme.nearlyWhite,
         backgroundColor: AppTheme.nearlyWhite,
       ),
-      home: SignInPage(),
+      home: userProfile == null
+          ? SignInPage()
+          : ScrollPoc(
+              userProfile: userProfile!,
+              userEmail: userEmail,
+              accessToken: accessToken!,
+            ),
     );
   }
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:olive/common/app_constant.dart';
-import 'package:olive/modules/daycare_module/daycare_home_screen.dart';
 import '../../../app_theme.dart';
 import '../../../common/material/OLBottomAction.dart';
 import '../../../entities/daycare_entity.dart';
@@ -16,13 +15,7 @@ class DaycareDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        backgroundColor: AppTheme.nearlyWhite,
-        scaffoldBackgroundColor: AppTheme.nearlyWhite,
-        useMaterial3: true,
-      ),
-      home: Scaffold(
+    return Scaffold(
         body: NestedScrollView(
           headerSliverBuilder: (context, innerBoxIsScrolled) {
             return [
@@ -34,11 +27,7 @@ class DaycareDetailScreen extends StatelessWidget {
                   leading: IconButton(
                     splashColor: AppTheme.nearlyWhite,
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => DaycareHomeScreen()),
-                      );
+                      Navigator.pop(context);
                     },
                     icon: Icon(Icons.chevron_left,
                         size: BACK_ARROW_SIZE, color: AppTheme.white),
@@ -65,7 +54,7 @@ class DaycareDetailScreen extends StatelessWidget {
                           Padding(
                               padding: EdgeInsets.all(0),
                               child: Container(
-                                height: 100,
+                                height: 110,
                                 width: 500,
                                 decoration: BoxDecoration(
                                   color: AppTheme.nearlyWhite,
@@ -78,7 +67,7 @@ class DaycareDetailScreen extends StatelessWidget {
                                     ),
                                   ],
                                   borderRadius: BorderRadius.vertical(
-                                    top: Radius.circular(50),
+                                    top: Radius.circular(PADDING_30),
                                   ),
                                 ),
                               )),
@@ -88,15 +77,15 @@ class DaycareDetailScreen extends StatelessWidget {
                                 padding: EdgeInsets.only(
                                     top: PADDING_26,
                                     bottom: PADDING_10,
-                                    left: PADDING_80,
-                                    right: PADDING_80),
+                                    left: PADDING_24,
+                                    right: PADDING_24),
                                 child: Text(daycareData!.daycareName,
                                     overflow: TextOverflow.fade,
-                                    maxLines: 1,
+                                    maxLines: 2,
                                     softWrap: false,
                                     style: GoogleFonts.notoSansThai(
                                         textStyle: TextStyle(
-                                            fontSize: AppTheme.FONT_28,
+                                            fontSize: AppTheme.FONT_24,
                                             color: AppTheme.pureBlack,
                                             fontWeight: FontWeight.w700,
                                             letterSpacing: 0.5))),
@@ -126,7 +115,7 @@ class DaycareDetailScreen extends StatelessWidget {
                     ),
                   ),
                   SliverFixedExtentList(
-                    itemExtent: 500.0,
+                    itemExtent: 1000.0,
                     delegate: SliverChildBuilderDelegate(
                       (BuildContext context, int index) {
                         return Container(
@@ -143,21 +132,18 @@ class DaycareDetailScreen extends StatelessWidget {
           ),
         ),
         bottomNavigationBar: BottomAppBar(
-          elevation: PADDING_10,
-          color: AppTheme.nearlyWhite,
-          child: Padding(
-              padding: const EdgeInsets.all(PADDING_18),
-              child: OverflowBar(
-                overflowAlignment: OverflowBarAlignment.center,
-                alignment: MainAxisAlignment.center,
-                children: [
-                  ButtonAction(
-                    daycareData: daycareData,
-                  )
-                ],
-              )),
-        ),
-      ),
-    );
+            elevation: PADDING_10,
+            color: AppTheme.nearlyWhite,
+            child: Padding(
+                padding: const EdgeInsets.all(PADDING_18),
+                child: OverflowBar(
+                  overflowAlignment: OverflowBarAlignment.center,
+                  alignment: MainAxisAlignment.center,
+                  children: [
+                    ButtonAction(
+                      daycareData: daycareData,
+                    )
+                  ],
+                ))));
   }
 }
