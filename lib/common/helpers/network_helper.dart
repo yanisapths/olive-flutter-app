@@ -7,7 +7,6 @@ class NetworkHelper {
     print(url);
     final response = await http.get(Uri.parse(url));
     final daycare = daycareFromJson(response.body);
-
     if (response.statusCode == 200) {
       return daycare;
     } else {

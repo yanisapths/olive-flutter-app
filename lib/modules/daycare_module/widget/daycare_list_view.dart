@@ -1,5 +1,6 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:olive/modules/daycare_module/daycare_detail_module/daycare_detail_screen.dart';
@@ -23,6 +24,10 @@ class DaycareListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String base64Image = daycareData!.imageUrl;
+    // Convert to UriData
+    UriData? data = Uri.parse(base64Image).data;
+    Uint8List bytesImage = data!.contentAsBytes();
     return AnimatedBuilder(
       animation: animationController!,
       builder: (BuildContext context, Widget? child) {
@@ -30,10 +35,10 @@ class DaycareListView extends StatelessWidget {
             opacity: animation!,
             child: Transform(
                 transform: Matrix4.translationValues(
-                    0.0, 50 * (1.0 - animation!.value), 0.0),
+                    0.0, 20 * (1.0 - animation!.value), 0.0),
                 child: Padding(
                   padding: const EdgeInsets.only(
-                      left: 24, right: 24, top: 8, bottom: 16),
+                      left: 10, right: 10, top: 8, bottom: 10),
                   child: InkWell(
                     splashColor: Colors.transparent,
                     onTap: callBack,
@@ -79,13 +84,14 @@ class DaycareListView extends StatelessWidget {
                                                 )),
                                       );
                                     },
-                                    child: Image.network(
-                                      daycareData!.imageUrl,
+                                    child: Image.memory(
+                                      bytesImage,
                                       fit: BoxFit.cover,
                                     )),
                                 Container(
                                   color: DaycareAppTheme.buildLightTheme()
-                                      .backgroundColor,
+                                      .colorScheme
+                                      .background,
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     crossAxisAlignment:
@@ -95,14 +101,14 @@ class DaycareListView extends StatelessWidget {
                                         child: Container(
                                           child: Padding(
                                             padding: const EdgeInsets.only(
-                                                left: 16, top: 8, bottom: 8),
+                                                left: 16, top: 8, bottom: 12),
                                             child: Column(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: <Widget>[
-                                                Text(daycareData!.daycareName,
+                                                Text(daycareData!.clinicName,
                                                     textAlign: TextAlign.left,
                                                     overflow: TextOverflow.fade,
                                                     maxLines: 1,
@@ -127,16 +133,16 @@ class DaycareListView extends StatelessWidget {
                                                       daycareData!.address,
                                                       overflow:
                                                           TextOverflow.fade,
-                                                      maxLines: 1,
+                                                      maxLines: 2,
                                                       softWrap: false,
                                                       style: TextStyle(
-                                                          fontSize: 14,
+                                                          fontSize: 10,
                                                           color: Colors.grey
                                                               .withOpacity(
                                                                   0.8)),
                                                     ),
                                                     const SizedBox(
-                                                      width: 4,
+                                                      width: 2,
                                                     ),
                                                     Icon(
                                                       FontAwesomeIcons
@@ -147,61 +153,6 @@ class DaycareListView extends StatelessWidget {
                                                           .primaryColor,
                                                     ),
                                                   ],
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          top: 4),
-                                                  child: Row(
-                                                    children: <Widget>[
-                                                      RatingBar(
-                                                        initialRating: 3.0,
-                                                        direction:
-                                                            Axis.horizontal,
-                                                        allowHalfRating: true,
-                                                        itemCount: 5,
-                                                        itemSize: 24,
-                                                        ratingWidget:
-                                                            RatingWidget(
-                                                          full: Icon(
-                                                            Icons
-                                                                .star_rate_rounded,
-                                                            color: DaycareAppTheme
-                                                                    .buildLightTheme()
-                                                                .primaryColor,
-                                                          ),
-                                                          half: Icon(
-                                                            Icons
-                                                                .star_half_rounded,
-                                                            color: DaycareAppTheme
-                                                                    .buildLightTheme()
-                                                                .primaryColor,
-                                                          ),
-                                                          empty: Icon(
-                                                            Icons
-                                                                .star_border_rounded,
-                                                            color: DaycareAppTheme
-                                                                    .buildLightTheme()
-                                                                .primaryColor,
-                                                          ),
-                                                        ),
-                                                        itemPadding:
-                                                            EdgeInsets.zero,
-                                                        onRatingUpdate:
-                                                            (rating) {
-                                                          print(rating);
-                                                        },
-                                                      ),
-                                                      Text(
-                                                        ' 5 Reviews',
-                                                        style: TextStyle(
-                                                            fontSize: 14,
-                                                            color: Colors.grey
-                                                                .withOpacity(
-                                                                    0.8)),
-                                                      ),
-                                                    ],
-                                                  ),
                                                 ),
                                               ],
                                             ),
@@ -216,23 +167,6 @@ class DaycareListView extends StatelessWidget {
                                               MainAxisAlignment.center,
                                           crossAxisAlignment:
                                               CrossAxisAlignment.end,
-                                          children: <Widget>[
-                                            Text(
-                                              '\$20',
-                                              textAlign: TextAlign.left,
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.w600,
-                                                fontSize: 22,
-                                              ),
-                                            ),
-                                            Text(
-                                              '/per night',
-                                              style: TextStyle(
-                                                  fontSize: 14,
-                                                  color: Colors.grey
-                                                      .withOpacity(0.8)),
-                                            ),
-                                          ],
                                         ),
                                       ),
                                     ],

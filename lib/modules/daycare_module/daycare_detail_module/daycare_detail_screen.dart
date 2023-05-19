@@ -1,9 +1,10 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:olive/common/app_constant.dart';
 import 'package:olive/modules/daycare_module/daycare_home_screen.dart';
 import '../../../app_theme.dart';
-import '../../../common/material/OLBottomAction.dart';
 import '../../../entities/daycare_entity.dart';
 import 'daycare_detail_tab.dart';
 
@@ -16,6 +17,10 @@ class DaycareDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String base64Image = daycareData!.imageUrl;
+    // Convert to UriData
+    UriData? data = Uri.parse(base64Image).data;
+    Uint8List bytesImage = data!.contentAsBytes();
     return MaterialApp(
       theme: ThemeData(
         scaffoldBackgroundColor: AppTheme.primary_main,
@@ -44,15 +49,13 @@ class DaycareDetailScreen extends StatelessWidget {
                   snap: false,
                   floating: false,
                   pinned: true,
-                  expandedHeight: MediaQuery.of(context).size.height * 0.50,
+                  expandedHeight: MediaQuery.of(context).size.height * 0.30,
                   flexibleSpace: Stack(
                     children: [
                       Positioned(
                           child: Opacity(
                             opacity: 0.9,
-                            child: Image(
-                                fit: BoxFit.cover,
-                                image: NetworkImage(daycareData!.imageUrl)),
+                            child: Image.memory(bytesImage),
                           ),
                           top: 0,
                           left: 0,
@@ -87,7 +90,7 @@ class DaycareDetailScreen extends StatelessWidget {
                                     bottom: PADDING_10,
                                     left: PADDING_80,
                                     right: PADDING_80),
-                                child: Text(daycareData!.daycareName,
+                                child: Text(daycareData!.clinicName,
                                     overflow: TextOverflow.fade,
                                     maxLines: 1,
                                     softWrap: false,
@@ -138,21 +141,6 @@ class DaycareDetailScreen extends StatelessWidget {
               );
             },
           ),
-        ),
-        bottomNavigationBar: BottomAppBar(
-          elevation: PADDING_10,
-          color: AppTheme.primary_main,
-          child: Padding(
-              padding: const EdgeInsets.all(PADDING_18),
-              child: OverflowBar(
-                overflowAlignment: OverflowBarAlignment.center,
-                alignment: MainAxisAlignment.center,
-                children: [
-                  ButtonAction(
-                    daycareData: daycareData,
-                  )
-                ],
-              )),
         ),
       ),
     );

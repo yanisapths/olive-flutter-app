@@ -12,7 +12,7 @@ String daycareToJson(List<Daycare> data) =>
 class Daycare {
   Daycare({
     required this.id,
-    required this.daycareName,
+    required this.clinicName,
     required this.address,
     required this.location,
     required this.owner,
@@ -21,13 +21,13 @@ class Daycare {
     required this.imageUrl,
     required this.approvalStatus,
     this.appointmentList,
-    required this.daycareId,
+    required this.clinicId,
     required this.description,
     this.reviews,
   });
 
   String id;
-  String daycareName;
+  String clinicName;
   String address;
   Location location;
   String owner;
@@ -37,12 +37,12 @@ class Daycare {
   String approvalStatus;
   List<Appointment>? appointmentList;
   List<Review>? reviews;
-  String daycareId;
+  String clinicId;
   String description;
 
   factory Daycare.fromJson(Map<String, dynamic> json) => Daycare(
         id: json["_id"],
-        daycareName: json["daycare_name"],
+        clinicName: json["clinic_name"],
         address: json["address"],
         location: Location.fromJson(json["location"]),
         owner: json["owner"],
@@ -54,7 +54,7 @@ class Daycare {
             ? null
             : List<Appointment>.from(
                 json["appointmentList"].map((x) => Appointment.fromJson(x))),
-        daycareId: json["daycare_id"],
+        clinicId: json["clinic_id"],
         description: json["description"] == null ? null : json["description"],
         reviews: json["reviews"] == null
             ? null
@@ -63,7 +63,7 @@ class Daycare {
 
   Map<String, dynamic> toJson() => {
         "_id": id,
-        "daycare_name": daycareName,
+        "clinic_name": clinicName,
         "address": address,
         "location": location.toJson(),
         "owner": owner,
@@ -72,7 +72,7 @@ class Daycare {
         "imageUrl": imageUrl,
         "approvalStatus": approvalStatus,
         "appointmentList": appointmentList == null ? null : appointmentList,
-        "daycare_id": daycareId,
+        "clinic_id": clinicId,
         "description": description,
         "reviews": reviews == null ? null : reviews,
       };

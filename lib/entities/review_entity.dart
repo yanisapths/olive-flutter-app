@@ -13,8 +13,7 @@ class Review {
     required this.comments,
     required this.date,
     required this.customerName,
-    required this.appointmentId,
-    required this.daycareId,
+    required this.clinicId,
   });
 
   String id;
@@ -22,17 +21,15 @@ class Review {
   String comments;
   String date;
   String customerName;
-  String appointmentId;
-  String daycareId;
+  String clinicId;
 
   factory Review.fromJson(Map<String, dynamic> json) => Review(
         id: json["_id"],
         reviewId: json["review_id"] == null ? null : json["review_id"],
         comments: json["comments"],
         date: json["date"] == null ? null : json["date"],
-        customerName: json["customerName"],
-        appointmentId: json["appointment_id"],
-        daycareId: json["daycare_id"] == null ? null : json["daycare_id"],
+        customerName: json["customer_name"],
+        clinicId: json["daycare_id"] == null ? null : json["clinic_id"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -41,7 +38,6 @@ class Review {
         "comments": comments,
         "date": date == null ? null : date,
         "customerName": customerName,
-        "appointment_id": appointmentId,
-        "daycare_id": daycareId == null ? null : daycareId,
+        "clinic_id": clinicId == null ? null : clinicId,
       };
 }

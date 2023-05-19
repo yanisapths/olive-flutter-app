@@ -11,19 +11,19 @@ class TabBarAction extends StatelessWidget {
     return Column(
       children: [
         Container(
-          height: PADDING_46,
+          height: PADDING_28,
           decoration: BoxDecoration(
             color: AppTheme.primary_main,
-            borderRadius: BorderRadius.circular(PADDING_60),
+            borderRadius: BorderRadius.circular(PADDING_10),
           ),
           child: TabBar(
               indicator: BoxDecoration(
                 color: AppTheme.secondaryGreenDark,
-                borderRadius: BorderRadius.circular(PADDING_60),
+                borderRadius: BorderRadius.circular(PADDING_10),
               ),
               indicatorColor: Color.fromARGB(255, 19, 148, 124),
               indicatorPadding:
-                  EdgeInsets.only(right: PADDING_12, left: PADDING_12),
+                  EdgeInsets.only(right: -PADDING_10, left: -PADDING_10),
               labelColor: AppTheme.white,
               unselectedLabelColor: AppTheme.pureBlack,
               tabs: [
